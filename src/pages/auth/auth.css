@@ -1,0 +1,66 @@
+.box {
+    width: 50%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+    background-color: white;
+}
+
+.box-2 {
+    width: 70%;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+    background-color: white;
+}
+
+.box-3 {
+    width: 100%;
+    padding-top: 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+    background-color: white;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+.form-container {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(0deg, rgba(227, 202, 254, 0.612) 0%, white 20%, white 80%, rgba(220, 205, 236, 0.612) 100%);
+}
+
+.form-container input {
+    border-bottom: 1px solid gray;
+    border-radius: 0px;
+}
+
+@media only screen and (max-width: 850px) {
+    .box {
+        width: 90%;
+    }
+
+    #details {
+        flex-direction: column;
+    }
+
+
+}
+
+.box h1 {
+    font-family: 'Playfair Display SC', serif;
+    text-align: center;
+}
+
+.box a {
+    text-decoration: none;
+}
+
+.box {
+    font-family: 'poppins';
+    text-align: center;
+}

@@ -1,0 +1,70 @@
+.myCard {
+    /* background-color: black; */
+    max-width: 90%;
+    height: 60vh;
+    box-shadow: rgba(98, 98, 111, 0.2) 0px 7px 29px 0px;
+    animation: animate 1.5s;
+}
+
+#wall {
+    margin-bottom: 20px;
+    position: absolute;
+    width: 100%;
+    /* background-repeat: no-repeat; */
+    background-image: url('../photos/WallExtend.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 50vh;
+    object-fit: cover;
+    /* backdrop-filter: blur(); */
+    /* filter: blur(2px); */
+    backdrop-filter: contrast(280%);
+}
+
+.batul {
+    float: right;
+    /* background-color: rgba(0, 0, 0, 0.001); */
+    position: relative;
+    color: white;
+    /* font-weight: bold; */
+
+    width: 50%;
+}
+
+.batul h1 {
+    font-family: 'Ephesis', cursive;
+    font-size: 82px;
+    margin: 0px;
+}
+
+@keyframes animate {
+    0% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+.myCard:hover {
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    transform: scale(1.05);
+}
+
+#number {
+    background-color: green;
+    border-radius: 20px;
+    color: white;
+}
+
+.heart {
+    color: red;
+    width: 35px;
+    height: 35px;
+}
+
+
+.myCard img {
+    width: auto;
+    height: 60%;
+}
