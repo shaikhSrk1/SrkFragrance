@@ -29,6 +29,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     const handleScroll = () => {
+        //To handle scroll
         var element = document.getElementById("show");
         element.scrollIntoView();
         element.scrollIntoView(false);
