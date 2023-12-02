@@ -9,7 +9,6 @@ import PageNotFound from './pages/PageNotFound';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import { Toaster } from 'react-hot-toast';
-import { Dashboard } from './pages/Dashboard';
 import Private from './Components/Routes/Private';
 import Products from './pages/Admin/Products';
 import Addproducts from './pages/Admin/Addproducts';
