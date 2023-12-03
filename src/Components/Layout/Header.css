@@ -6,7 +6,10 @@
     #brand {
         font-size: 15px;
     }
+}
 
+.nav-link {
+    background: white;
 }
 
 #brand {

@@ -6,6 +6,7 @@
   box-sizing: border-box;
 }
 
+
 #root {
   width: 100vw !important;
 }
@@ -35,3 +36,27 @@ p {
 
 /* font-family: 'Poppins', sans-serif; */
 /* font-family: 'Playfair Display SC', serif; */
+
+
+
+.contact {
+  width: 75%;
+}
+
+@media only screen and (max-width: 400px) {
+
+  .form-container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .form-container input,
+  .contact,
+  .info-wrap {
+    width: 95% !important
+  }
+
+  .no-phone {
+    display: none
+  }
+}

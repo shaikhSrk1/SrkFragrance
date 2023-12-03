@@ -41,13 +41,12 @@
 
 @media only screen and (max-width: 850px) {
     .box {
-        width: 90%;
+        width: 100%;
     }
 
     #details {
         flex-direction: column;
     }
-
 
 }
 

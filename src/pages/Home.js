@@ -172,7 +172,7 @@ const Home = () => {
 
 
 
-            <div style={{ position: 'relative', height: '50vh', width: '100%' }} className='fluid-container' id='wall'>
+            <div style={{ position: 'relative', height: '50vh', width: '100%' }} className='fluid-container no-phone' id='wall'>
                 <div style={{ backgroundColor: '', zIndex: '' }} className='batul m-4 p-3 ' >
                     <h1>Aromas Haven</h1>
                     <p>Welcome to Aroma Haven ! Our passion for scents and dedication to quality make us your ideal choice for all things perfume </p>
@@ -181,17 +181,15 @@ const Home = () => {
             </div>
             <div className='container' style={{}} id='show'>
                 <div className="navbar bg-dark bg-body-tertiary ">
-                    <div className="container-fluid d-flex justify-content-between">
-                        <button style={{ width: 'auto' }} className="btn btn-outline-danger wish mx-3 ">
+                    <div className="container-fluid d-flex justify-content-around">
+                        <button style={{ width: 'auto' }} className="btn btn-outline-danger no-phone wish mx-3 ">
                             <CiHeart /> Wishlist
                         </button>
-                        {/* <form className="d-flex" role="search"> */}
-                        <div className='d-flex justify-content-end' style={{ width: '85%' }}>
+                        <div className='d-flex justify-content-center' style={{ width: '85%' }}>
 
                             <input style={{ width: '75%' }} className="form-control me-2" type="search" placeholder="Search for products" aria-label="Search" />
                             <button className="btn btn-primary" type="submit"><FaSearch /></button>
                         </div>
-                        {/* </form> */}
                     </div>
                 </div>
             </div>

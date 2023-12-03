@@ -79,6 +79,14 @@ const Header = () => {
                             <li className="nav-item">
                                 <NavLink to='/dashboard/messages' className="nav-link">Messages</NavLink>
                             </li>
+                            <li>
+                                <NavLink to='/cart' className="nav-link" style={{ position: 'relative' }}>
+                                    <AiOutlineShoppingCart className='me-1' style={{ fontSize: '25px' }} />
+                                    <span id='number' className='px-2' style={{ position: 'relative', bottom: '9px', right: '9px' }}>
+                                        1
+                                    </span>
+                                </NavLink>
+                            </li>
                         </ul>) : (<ul className="ms-auto navbar-nav">
                             <li className="nav-item">
                                 <NavLink to='/' className="nav-link" aria-current="page">Home</NavLink>
@@ -92,6 +100,15 @@ const Header = () => {
                             </li>
                             <li className="nav-item">
                                 <NavLink to='/contact' className="nav-link">Contact Us</NavLink>
+                            </li>
+                            <li>
+
+                                <NavLink to='/cart' className="nav-link" style={{ position: 'relative' }}>
+                                    Cart <AiOutlineShoppingCart className='me-1' style={{ fontSize: '25px' }} />
+                                    <span id='number' className='px-2' style={{ position: 'relative', bottom: '9px', right: '9px' }}>
+                                        1
+                                    </span>
+                                </NavLink>
                             </li>
                         </ul>)
                     }
@@ -125,12 +142,7 @@ const Header = () => {
                         <NavLink to='/wishlist' style={{ border: 'none' }} className="mx-1"><button className="btn nav-btn btn-outline-danger">
                             <FaHeart style={{}} />
                         </button></NavLink>
-                        <NavLink to='/cart' className="nav-link nav-btn" style={{ position: 'relative' }}>
-                            <AiOutlineShoppingCart className='me-1' style={{ fontSize: '25px' }} />
-                            <span id='number' className='px-2' style={{ position: 'relative', bottom: '9px', right: '9px' }}>
-                                1
-                            </span>
-                        </NavLink>
+
                     </div>
                     {/* </div> */}
                 </div>
