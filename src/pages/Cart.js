@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../Components/Layout/Layout'
 import noCart from '../photos/emptyCart.avif'
 import { useNavigate } from 'react-router-dom';
-import pic from '../photos/about.jpg'
 import axios from 'axios';
 import Spinner2 from '../Components/Spinner2.js';
+import { useAuth } from '../context/auth.js';
+import toast from 'react-hot-toast';
 
 const Cart = () => {
+    const [auth, setAuth] = useAuth()
     const [totalItem, setTotalItem] = useState(0);
     const [loading, setLoading] = useState(false);
     const [items, setItems] = useState()
@@ -14,8 +16,13 @@ const Cart = () => {
     const navigate = useNavigate();
 
     const getCartproducts = async () => {
+        if (auth.user == null) {
+            setTotalItem(0);
+            setLoading(true)
+            return;
+        }
         try {
-            const item = await axios.get(`${process.env.REACT_APP_API}api/v1/cart/get-items`);
+            const item = await axios.get(`${process.env.REACT_APP_API}api/v1/cart/get-items/${auth.user._id}`);
             // prod = await prod.json();
             console.log(item.data.items)
             if (item) {
@@ -30,6 +37,22 @@ const Cart = () => {
         }
     }
 
+
+    const removefromCart = async (e, cid, name) => {
+        // e.preventDefault();
+        try {
+            const prod = await axios.delete(`${process.env.REACT_APP_API}api/v1/cart/delete-item-cart/${cid}`);
+            // prod = await prod.json();
+            if (prod) {
+                toast.success(`${name} removed from cart`)
+                getCartproducts()
+            }
+        } catch (error) {
+            toast.error(error.response.data.message)
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         getCartproducts();
     }, [totalItem])
@@ -38,7 +61,7 @@ const Cart = () => {
         navigate('/');
     }
 
-    const Item = ({ name, price, qty }) => {
+    const Item = ({ name, price, qty, id, cid }) => {
         return (<>
             <div style={{ height: '120px', width: '95%', borderRadius: '10px' }} className='d-flex p-2 my-2 box'>
                 <div className='d-flex justify-content-between' style={{ width: '100%', flexDirection: 'column' }}>
@@ -48,7 +71,7 @@ const Cart = () => {
                         <span className='mx-2'>Qty : {qty}</span>
                     </div>
                     <span>
-                        <button className='btn' style={{ borderTop: '1px solid gray ', borderRight: '1px solid gray ', borderRadius: '0px', width: '40%' }}>
+                        <button className='btn' onClick={(e) => removefromCart(e, cid, name)} style={{ borderTop: '1px solid gray ', borderRight: '1px solid gray ', borderRadius: '0px', width: '40%' }}>
                             Remove
                         </button>
                         <button className='btn' style={{ borderTop: '1px solid gray ', borderRadius: '0px', width: '40%' }}>
@@ -56,7 +79,7 @@ const Cart = () => {
                         </button>
                     </span>
                 </div>
-                <img src={pic} style={{ height: '100%', width: '130px' }} />
+                <img src={`${process.env.REACT_APP_API}api/v1/product/product-photo/${id}`} alt='Product' style={{ height: '100%', width: '130px' }} />
             </div>
         </>)
     }
@@ -74,9 +97,11 @@ const Cart = () => {
                                 <div className='d-flex align-items-start justify-content-center p-2 m-4' style={{ minHeight: '30vh', flexDirection: 'column', minWidth: '50%' }}>
                                     {items.map((item) =>
                                         <Item
-                                            name={item.product}
+                                            name={item.name}
                                             price={item.price}
                                             qty={item.quantity}
+                                            id={item.product}
+                                            cid={item._id}
                                         />
                                     )}
                                 </div>

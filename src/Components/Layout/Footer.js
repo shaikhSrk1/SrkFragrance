@@ -7,8 +7,8 @@ const Footer = () => {
         <>
             <footer className="footer text-center text-white" style={{ backgroundColor: '#908f89' }}>
                 <div className="container p-4">
-                    <section className>
-                        <form action>
+                    <section>
+                        <form >
                             <div className="row d-flex justify-content-center">
                                 <div className="col-auto">
                                     <p className="pt-2">

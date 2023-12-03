@@ -24,7 +24,6 @@ const Home = () => {
     const [description, setDescription] = useState('');
     const [count, setCount] = useState(1)
     const [loading, setLoading] = useState(true);
-    const refe = useRef(null)
 
     const navigate = useNavigate();
 
@@ -78,12 +77,21 @@ const Home = () => {
     }
 
 
-    const handleCart = (e, name, c) => {
+    const handleCart = async (e, name, count, id) => {
         e.preventDefault();
         if (auth.user) {
-            toast.success(`${c} ${name} Added to cart`)
+            try {
+                console.log(auth.user._id)
+                const prod = await axios.post(`${process.env.REACT_APP_API}api/v1/cart/add-item-cart`, { product: id, user: auth.user._id, quantity: count });
+                // prod = await prod.json();
+                if (prod) {
+                    toast.success(`${count} ${name} Added to cart`)
+                }
+            } catch (error) {
+                toast.error('Product Already in Cart')
+            }
         } else {
-            toast.error('Please First Login before shopping');
+            toast.error('Please Login');
             navigate('/login')
         }
     }
@@ -108,8 +116,6 @@ const Home = () => {
     }, [])
 
     const handleclick = async (name, feature, price, id, description) => {
-        // let prod = await axios.get(`${process.env.REACT_APP_API}api/v1/product/singleproduct/${i}`);
-        // prod = prod.data.product
         setVisible(true);
         setName(name)
         setFeature(feature)
@@ -151,7 +157,7 @@ const Home = () => {
                     <p className='m-0 p-0'>{feature}</p>
                     <div className='d-flex align-items-center mt-2 justify-content-between'>
                         <h2 style={{ color: '#383838' }}>$ {price}</h2>
-                        <button onClick={(e) => { handleCart(e, Name, 1) }} className="btn btn-outline-success rounded-pill mx-1">
+                        <button onClick={(e) => { handleCart(e, Name, 1, id) }} className="btn btn-outline-success rounded-pill mx-1">
                             <MdShoppingCart /> Add to Cart
                         </button>
                     </div>
@@ -162,7 +168,7 @@ const Home = () => {
 
     return (
         <Layout>
-            {/* <pre> {JSON.stringify(auth, null, 4)}</pre> */}
+            <pre> {JSON.stringify(auth, null, 4)}</pre>
 
 
 
@@ -190,8 +196,8 @@ const Home = () => {
                 </div>
             </div>
 
-            <div class="container my-4 box-3">
-                <div class="row" >
+            <div className="container my-4 box-3">
+                <div className="row" >
                     {
                         loading ? (<Spinner2 />) : <>
                             {products ? products?.map((item, i) =>
@@ -211,12 +217,12 @@ const Home = () => {
                 </div>
             </div>
 
-            <Modal bodyStyle={{ height: 'fit-content' }} width={1000} onCancel={() => setVisible(false)} footer={null} open={visible} >
+            <Modal styles={{ height: 'fit-content' }} width={1000} onCancel={() => setVisible(false)} footer={null} open={visible} >
                 <div className='container box-2' style={{ width: '100%', height: "100%" }}>
 
                     <div className='container box p-0'>
                         <label style={{ width: '100%', height: '100%', objectFit: 'cover' }} className='d-flex align-items-center justify-content-center '>
-                            {id != null ? <img style={{ objectFit: 'cover', height: '100%', width: '100%' }} src={`${process.env.REACT_APP_API}api/v1/product/product-photo/${id}`} /> : <img src={URL.createObjectURL(photo)} style={{ width: '100% ' }} />}
+                            {id != null ? <img style={{ objectFit: 'cover', height: '100%', width: '100%' }} alt='Product img' src={`${process.env.REACT_APP_API}api/v1/product/product-photo/${id}`} /> : <img src={URL.createObjectURL(photo)} alt='Product img' style={{ width: '100% ' }} />}
                             {/* <input type='file' name='photo' hidden accept='image/*' onChange={(e) => { setId(null); setPhoto(e.target.files[0]); }} /> */}
                         </label>
                     </div>
@@ -241,7 +247,7 @@ const Home = () => {
                                         +
                                     </button>
                                 </div>
-                                <button onClick={(e) => handleCart(e, name, count)} className="btn btn-outline-primary rounded-pill ">
+                                <button onClick={(e) => handleCart(e, name, count, id)} className="btn btn-outline-primary rounded-pill ">
                                     <MdShoppingCart /> Add to Cart
                                 </button>
                             </div>

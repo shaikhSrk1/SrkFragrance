@@ -19,7 +19,7 @@ const Login = () => {
             if (resp.data.success && resp) {
                 toast.success('Login successfully');
 
-                if (resp.data.user.role == 1) {
+                if (resp.data.user.role === 1) {
                     navigate('/dashboard/products')
                 } else {
                     navigate('/')

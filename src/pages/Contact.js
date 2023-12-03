@@ -3,7 +3,7 @@ import Layout from '../Components/Layout/Layout'
 import './contact.css';
 import { FaRegAddressCard } from 'react-icons/fa';
 import '../index.css'
-import { Link } from 'react-router-dom';
+
 
 const Contact = () => {
     return (
