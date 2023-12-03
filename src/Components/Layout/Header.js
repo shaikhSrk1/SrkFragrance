@@ -106,7 +106,7 @@ const Header = () => {
                                 <NavLink to='/cart' className="nav-link" style={{ position: 'relative' }}>
                                     Cart <AiOutlineShoppingCart className='me-1' style={{ fontSize: '25px' }} />
                                     <span id='number' className='px-2' style={{ position: 'relative', bottom: '9px', right: '9px' }}>
-                                        {auth.user != null ? auth.items : 0}
+                                        {auth.user == null ? 0 : auth.items}
                                     </span>
                                 </NavLink>
                             </li>

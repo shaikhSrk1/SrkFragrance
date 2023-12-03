@@ -46,11 +46,6 @@ const Cart = () => {
             if (prod) {
                 toast.success(`${name} removed from cart`)
                 getCartproducts();
-                let c = auth.items - 1
-                setAuth({
-                    ...auth,
-                    items: c
-                })
             }
         } catch (error) {
             toast.error(error.response.data.message)
@@ -60,6 +55,14 @@ const Cart = () => {
 
     useEffect(() => {
         getCartproducts();
+        if (items) {
+
+            let c = items.length
+            setAuth({
+                ...auth,
+                items: c
+            })
+        }
     }, [totalItem])
 
     const foo = () => {
