@@ -35,20 +35,28 @@ const Home = () => {
         element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
     }
 
-    const handleLike = (e, name) => {
+    const addLike = async (e, name, pid) => {
         e.preventDefault();
-        if (auth.user) {
-            toast.success(`${name} added to Wishlist`, {
-                style: {
-                    border: '1px solid red',
-                    padding: '16px',
-                    color: 'black',
-                },
-                iconTheme: {
-                    primary: 'red',
-                    secondary: '#FFFAEE',
-                },
-            });
+        if (auth.user != null) {
+            try {
+                const res = await axios.post(`${process.env.REACT_APP_API}api/v1/wish/add-item-wish`, { user: auth.user._id, product: pid });
+                if (res.data.success) {
+                    toast.success(`${name} added to Wishlist`, {
+                        style: {
+                            border: '1px solid black',
+                            padding: '16px',
+                            color: 'black',
+                        },
+                        iconTheme: {
+                            primary: 'gray',
+                            secondary: '#FFFAEE',
+                        },
+                    });
+                }
+            } catch (error) {
+                toast.error(error.response.data.message)
+            }
+
         } else {
             toast.error('Please First Login');
             navigate('/login')
@@ -59,7 +67,7 @@ const Home = () => {
         e.preventDefault();
         if (auth.user) {
             // toast.success(`${name} removed from Wishlist`)
-            toast.success(`${name} removed from Wishlist`, {
+            toast.error(`${name} removed from Wishlist`, {
                 style: {
                     border: '1px solid gray',
                     padding: '16px',
@@ -156,8 +164,8 @@ const Home = () => {
                 <div className="card-body">
                     <div className='d-flex align-items-center justify-content-between'>
                         <h4>{Name} </h4>
-                        {/* <CiHeart className='heart' onClick={(e) => { handleLike(e, Name) }} /> */}
-                        <FaHeart className='heart' onClick={(e) => { removeLike(e, Name) }} />
+                        {/* <CiHeart className='heart' onClick={(e) => { addLike(e, Name,id) }} /> */}
+                        {/* <FaHeart className='heart' onClick={(e) => { removeLike(e, Name, id) }} /> */}
                     </div>
                     <p className='m-0 p-0'>{feature}</p>
                     <div className='d-flex align-items-center mt-2 justify-content-between'>
@@ -175,8 +183,6 @@ const Home = () => {
         <Layout>
             {/* <pre> {JSON.stringify(auth, null, 4)}</pre> */}
 
-
-
             <div style={{ position: 'relative', height: '50vh', width: '100%' }} className='fluid-container no-phone' id='wall'>
                 <div style={{ backgroundColor: '', zIndex: '' }} className='batul m-4 p-3 ' >
                     <h1>Aromas Haven</h1>
@@ -187,7 +193,7 @@ const Home = () => {
             <div className='container' style={{}} id='show'>
                 <div className="navbar bg-dark bg-body-tertiary ">
                     <div className="container-fluid d-flex justify-content-around">
-                        <button style={{ width: 'auto' }} className="btn btn-outline-danger no-phone wish mx-3 ">
+                        <button style={{ width: 'auto' }} onClick={() => { navigate('/wishlist') }} className="btn btn-outline-danger no-phone wish mx-3 ">
                             <CiHeart /> Wishlist
                         </button>
                         <div className='d-flex justify-content-center' style={{ width: '85%' }}>
@@ -237,7 +243,7 @@ const Home = () => {
                                 <p style={{ textAlign: 'left' }}>{description}</p>
                             </div>
                             <div className='d-flex justify-content-between px-3' id='details'>
-                                <button onClick={(e) => handleLike(e, name)} className="btn btn-outline-danger mx-3 ">
+                                <button onClick={(e) => addLike(e, name, id)} className="btn btn-outline-danger mx-3 ">
                                     <CiHeart /> Add to Wishlist
                                 </button>
 

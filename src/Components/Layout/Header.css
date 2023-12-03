@@ -8,8 +8,9 @@
     }
 }
 
-.nav-link {
-    background: white;
+.nav-link,
+.navbar {
+    background-color: whitesmoke !important;
 }
 
 #brand {

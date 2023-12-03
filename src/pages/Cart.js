@@ -7,6 +7,7 @@ import Spinner2 from '../Components/Spinner2.js';
 import { useAuth } from '../context/auth.js';
 import toast from 'react-hot-toast';
 
+
 const Cart = () => {
     const [auth, setAuth] = useAuth()
     const [totalItem, setTotalItem] = useState(0);
@@ -37,6 +38,27 @@ const Cart = () => {
         }
     }
 
+    const moveToWishlist = async (e, id, name, cid) => {
+        e.preventDefault();
+        try {
+            addLike(e, name, id)
+            const is = removefromCart(e, cid, name);
+            if (is) {
+                toast.success(`${name} moved to wishlist`)
+            }
+        } catch (error) {
+            toast.error('Something went wrong')
+        }
+    }
+    const addLike = async (e, name, pid) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_API}api/v1/wish/add-item-wish`, { user: auth.user._id, product: pid });
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+    }
+
 
     const removefromCart = async (e, cid, name) => {
         // e.preventDefault();
@@ -46,6 +68,7 @@ const Cart = () => {
             if (prod) {
                 toast.success(`${name} removed from cart`)
                 getCartproducts();
+                return true;
             }
         } catch (error) {
             toast.error(error.response.data.message)
@@ -82,7 +105,7 @@ const Cart = () => {
                         <button className='btn' onClick={(e) => removefromCart(e, cid, name)} style={{ borderTop: '1px solid gray ', borderRight: '1px solid gray ', borderRadius: '0px', width: '40%' }}>
                             Remove
                         </button>
-                        <button className='btn' style={{ borderTop: '1px solid gray ', borderRadius: '0px', width: '40%' }}>
+                        <button className='btn' onClick={(e) => { moveToWishlist(e, id, name, cid) }} style={{ borderTop: '1px solid gray ', borderRadius: '0px', width: '40%' }}>
                             Move to wish list
                         </button>
                     </span>
@@ -94,10 +117,7 @@ const Cart = () => {
 
     return (
         <Layout>
-
-
             {
-
                 loading ? <>
                     {
                         totalItem > 0 ?
