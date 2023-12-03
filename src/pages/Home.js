@@ -144,8 +144,8 @@ const Home = () => {
     }
 
     const Card = ({ Name, image, feature, price, id, description }) => (
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4">
-            <div className="card myCard m-0 mb-5" >
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4" style={{ alignSelf: 'center' }} >
+            <div className="card myCard m-3" style={{ maxWidth: '100%' }} >
 
                 <img style={{ objectFit: 'cover' }} onClick={() => { handleclick(Name, feature, price, id, description) }} src={`${process.env.REACT_APP_API}api/v1/product/product-photo/${id}`} alt={Name} />
                 <div className="card-body">
@@ -163,12 +163,12 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 
     return (
         <Layout>
-            <pre> {JSON.stringify(auth, null, 4)}</pre>
+            {/* <pre> {JSON.stringify(auth, null, 4)}</pre> */}
 
 
 
@@ -196,25 +196,25 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className="container my-4 box-3">
-                <div className="row" >
-                    {
-                        loading ? (<Spinner2 />) : <>
-                            {products ? products?.map((item, i) =>
-                                < Card
-                                    Name={item.name}
-                                    image={item.photo}
-                                    feature={item.features}
-                                    price={item.price}
-                                    id={item._id}
-                                    description={item.description ? item.description : ''}
-                                    clickHandler={() => handleclick(item._id)}
-                                />)
-                                :
-                                'No products in your shop. start Adding'}
-                        </>
-                    }
-                </div>
+            <div className="container my-4 box-3 d-flex" style={{ width: '100%', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+                {/* <div className="row" > */}
+                {
+                    loading ? (<Spinner2 />) : <>
+                        {products ? products?.map((item, i) =>
+                            < Card
+                                Name={item.name}
+                                image={item.photo}
+                                feature={item.features}
+                                price={item.price}
+                                id={item._id}
+                                description={item.description ? item.description : ''}
+                                clickHandler={() => handleclick(item._id)}
+                            />)
+                            :
+                            'No products in your shop. start Adding'}
+                    </>
+                }
+                {/* </div> */}
             </div>
 
             <Modal styles={{ height: 'fit-content' }} width={1000} onCancel={() => setVisible(false)} footer={null} open={visible} >
