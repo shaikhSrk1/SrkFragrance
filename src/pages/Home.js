@@ -85,7 +85,12 @@ const Home = () => {
                 const prod = await axios.post(`${process.env.REACT_APP_API}api/v1/cart/add-item-cart`, { product: id, user: auth.user._id, quantity: count });
                 // prod = await prod.json();
                 if (prod) {
-                    toast.success(`${count} ${name} Added to cart`)
+                    toast.success(`${count} ${name} Added to cart`);
+                    let c = auth.items + 1
+                    setAuth({
+                        ...auth,
+                        items: c
+                    })
                 }
             } catch (error) {
                 toast.error('Product Already in Cart')

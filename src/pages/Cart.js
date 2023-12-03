@@ -45,7 +45,12 @@ const Cart = () => {
             // prod = await prod.json();
             if (prod) {
                 toast.success(`${name} removed from cart`)
-                getCartproducts()
+                getCartproducts();
+                let c = auth.items - 1
+                setAuth({
+                    ...auth,
+                    items: c
+                })
             }
         } catch (error) {
             toast.error(error.response.data.message)
