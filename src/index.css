@@ -43,17 +43,60 @@ p {
   width: 75%;
 }
 
-@media only screen and (max-width: 400px) {
+.wishrow {
+  width: 60%;
+}
+
+.cartrow {
+  width: 80%;
+  flex-direction: row;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 20px;
+  background-color: white;
+  text-align: center;
+}
+
+
+.cartParent {
+  width: 50%;
+  flex-direction: column;
+}
+
+.font {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+
+
+@media only screen and (max-width: 500px) {
 
   .form-container {
     padding-left: 0px;
     padding-right: 0px;
   }
 
+  .cartrow {
+    width: 100%;
+  }
+
+  .cartrow .item {
+    width: 80%;
+  }
+
+
   .form-container input,
   .contact,
   .info-wrap {
     width: 95% !important
+  }
+
+  .cartParent {
+    width: 100%;
+  }
+
+  .wishrow {
+    width: 100%;
   }
 
   .no-phone {

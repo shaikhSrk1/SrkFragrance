@@ -39,7 +39,7 @@
         flex-direction: column;
     }
 
-    #cart div {
+    #cart .cartParent {
         width: 100%;
     }
 

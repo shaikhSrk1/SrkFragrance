@@ -39,9 +39,17 @@
     border-radius: 0px;
 }
 
+.batul p {
+    display: block;
+}
+
 @media only screen and (max-width: 850px) {
     .box {
         width: 100%;
+    }
+
+    .batul p {
+        display: none;
     }
 
     #details {

@@ -11,7 +11,7 @@ const Wishlist = () => {
 
     const navigate = useNavigate();
     const [auth, setAuth] = useAuth()
-    const [totalItem, setTotalItem] = useState(1)
+    const [totalItem, setTotalItem] = useState(0)
     const [loading, setLoading] = useState(false);
     const [items, setItems] = useState()
 
@@ -96,18 +96,18 @@ const Wishlist = () => {
 
     const Item = ({ name, price, id, wid }) => {
         return (<>
-            <div style={{ height: '120px', borderRadius: '10px', width: '60%' }} className='d-flex justify-content-between p-2 m-2 box'>
+            <div style={{ height: '120px', borderRadius: '10px' }} className='d-flex wishrow justify-content-between p-2 m-2 box'>
                 {/* <div className='d-flex justify-content-between ' style={{ width: '100%' }}> */}
                 <img src={`${process.env.REACT_APP_API}api/v1/product/product-photo/${id}`} alt='Product' style={{ height: '100%', width: '130px' }} />
                 <span className='d-flex justify-content-center ' style={{ flexDirection: 'column' }}>
                     <p className='m-0'> {name} </p>
-                    <h3>$ {price}</h3>
+                    <h3>&#8377;{price}</h3>
                 </span>
                 <span style={{ flexDirection: 'column', display: 'flex', justifyContent: 'space-around' }}>
-                    <button className='btn btn-outline-danger' onClick={(e) => removefroWish(e, name, wid)}>
+                    <button className='btn btn-sm btn-outline-danger' onClick={(e) => removefroWish(e, name, wid)}>
                         Remove
                     </button>
-                    <button className='btn btn-primary' onClick={(e) => { addtocart(e, id, name) }}>
+                    <button className='btn btn-sm btn-primary' onClick={(e) => { addtocart(e, id, name) }}>
                         Add to cart
                     </button>
                 </span>
@@ -121,7 +121,7 @@ const Wishlist = () => {
                 loading ? <>
                     {
                         totalItem > 0 ?
-                            <div id='cart' className='d-flex my-3' style={{ minWidth: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <div id='cart' className='d-flex wishrow my-3' style={{ minWidth: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 {/* <div className='d-flex align-items-start justify-content-center p-2' style={{ minHeight: '30vh', flexDirection: 'column', minWidth: '45%' }}> */}
                                 {items?.map((item) =>
                                     <Item

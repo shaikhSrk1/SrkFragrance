@@ -169,7 +169,7 @@ const Home = () => {
                     </div>
                     <p className='m-0 p-0'>{feature}</p>
                     <div className='d-flex align-items-center mt-2 justify-content-between'>
-                        <h2 style={{ color: '#383838' }}>$ {price}</h2>
+                        <h2 style={{ color: '#383838' }}>&#8377;{price}</h2>
                         <button onClick={(e) => { handleCart(e, Name, 1, id) }} className="btn btn-outline-success rounded-pill mx-1">
                             <MdShoppingCart /> Add to Cart
                         </button>
@@ -184,14 +184,14 @@ const Home = () => {
             {/* <pre> {JSON.stringify(auth, null, 4)}</pre> */}
 
             <div style={{ position: 'relative', height: '50vh', width: '100%' }} className='fluid-container no-phone' id='wall'>
-                <div style={{ backgroundColor: '', zIndex: '' }} className='batul m-4 p-3 ' >
+                <div style={{ backgroundColor: '', zIndex: '' }} className='batul p-2 ' >
                     <h1>Aromas Haven</h1>
                     <p>Welcome to Aroma Haven ! Our passion for scents and dedication to quality make us your ideal choice for all things perfume </p>
                     <button className='btn btn-secondary' onClick={() => { handleScroll() }}> Start Shopping</button>
                 </div>
             </div>
             <div className='container' style={{}} id='show'>
-                <div className="navbar bg-dark bg-body-tertiary ">
+                <div className="bg-dark bg-body-tertiary ">
                     <div className="container-fluid d-flex justify-content-around">
                         <button style={{ width: 'auto' }} onClick={() => { navigate('/wishlist') }} className="btn btn-outline-danger no-phone wish mx-3 ">
                             <CiHeart /> Wishlist
@@ -199,7 +199,7 @@ const Home = () => {
                         <div className='d-flex justify-content-center' style={{ width: '85%' }}>
 
                             <input style={{ width: '75%' }} className="form-control me-2" type="search" placeholder="Search for products" aria-label="Search" />
-                            <button className="btn btn-primary" type="submit"><FaSearch /></button>
+                            <button className="btn btn-success" type="submit"><FaSearch /></button>
                         </div>
                     </div>
                 </div>
