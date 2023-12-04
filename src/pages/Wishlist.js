@@ -70,10 +70,10 @@ const Wishlist = () => {
         }
     }
 
-    const removefroWish = async (e, name, wid) => {
+    const removefroWish = async (e, name, id) => {
         e.preventDefault();
         try {
-            const prod = await axios.delete(`${process.env.REACT_APP_API}api/v1/wish/delete-item-wish/${wid}`);
+            const prod = await axios.delete(`${process.env.REACT_APP_API}api/v1/wish/delete-item-wish/${id}/${auth.user._id}`);
             // prod = await prod.json();
             if (prod) {
                 toast.success(`${name} removed from Wishlist`, {
@@ -94,7 +94,7 @@ const Wishlist = () => {
         }
     }
 
-    const Item = ({ name, price, id, wid }) => {
+    const Item = ({ name, price, id }) => {
         return (<>
             <div style={{ height: '120px', borderRadius: '10px' }} className='d-flex wishrow justify-content-between p-2 m-2 box'>
                 {/* <div className='d-flex justify-content-between ' style={{ width: '100%' }}> */}
@@ -104,7 +104,7 @@ const Wishlist = () => {
                     <h3>&#8377;{price}</h3>
                 </span>
                 <span style={{ flexDirection: 'column', display: 'flex', justifyContent: 'space-around' }}>
-                    <button className='btn btn-sm btn-outline-danger' onClick={(e) => removefroWish(e, name, wid)}>
+                    <button className='btn btn-sm btn-outline-danger' onClick={(e) => removefroWish(e, name, id)}>
                         Remove
                     </button>
                     <button className='btn btn-sm btn-primary' onClick={(e) => { addtocart(e, id, name) }}>
