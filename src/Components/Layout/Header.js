@@ -1,20 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import './Header.css';
 import { useAuth } from '../../context/auth';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { BiLogOut } from 'react-icons/bi';
 import { CiLogin } from "react-icons/ci";
+import { CiUser } from "react-icons/ci";
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { useCart } from '../../context/cart';
+import { Modal } from 'antd';
 
 const Header = () => {
     const navigate = useNavigate();
     const [auth, setAuth] = useAuth();
     const [cart, setCart] = useCart();
+    const [visible, setVisible] = useState(false);
+
     const handleLogout = () => {
         setAuth({
             ...auth,
@@ -43,18 +47,24 @@ const Header = () => {
 
 
                 {/* phone navbar */}
-                <ul style={{ display: 'flex' }} className="m-0 p-0">
+                <ul style={{ display: 'flex', alignItems: 'center' }} className="m-0 p-0">
                     <NavLink to='/cart' className="nav-link  phone" style={{ position: 'relative' }}>
-                        Cart <AiOutlineShoppingCart className='me-1 ' style={{ fontSize: '25px' }} />
-                        <span id='number' className='px-2' style={{ position: 'relative', bottom: '9px', right: '9px' }}>
+                        <AiOutlineShoppingCart className='me-1 ' style={{ fontSize: '25px' }} />
+                        <span id='number' className='px-2' style={{ position: 'absolute', opacity: '65%', top: '-15px', right: '15px' }}>
                             {cart?.length}
                         </span>
                     </NavLink>
-                    <NavLink to='/wishlist' style={{ border: 'none' }} className="mx-1  phone"><button className="btn btn-sm nav-2btn btn-outline-danger">
-                        <FaHeart />
-                    </button></NavLink>
+                    <NavLink to='/wishlist' style={{ border: 'none' }} className="mx-1  phone"><FaHeart style={{ color: 'black' }} /></NavLink>
 
-                    <button className="navbar-toggler p-1 py-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    {
+                        auth.token ? <NavLink to='/profile' style={{ border: 'none', fontSize: '25px' }} className="mx-1 phone">
+                            <CiUser style={{ color: 'black' }} />
+                        </NavLink> : ''
+                    }
+
+
+
+                    <button className="navbar-toggler ms-1 p-1 py-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
                     </button>
                 </ul>
@@ -103,7 +113,7 @@ const Header = () => {
                                 {
                                     auth.user ? (
                                         <span>
-                                            <NavLink to='/login' onClick={handleLogout} className="nav-link phone">  <BiLogOut /> Logout </NavLink>
+                                            <NavLink to='/login' onClick={() => setVisible(true)} className="nav-link phone">  <BiLogOut /> Logout </NavLink>
                                         </span>
                                     ) :
                                         (<>
@@ -124,36 +134,54 @@ const Header = () => {
                         </ul>)
                     }
 
-                    <div className="ms-auto navbar-nav big">
+                    <div className="ms-auto d-flex align-items-center navbar-nav big">
 
                         {
                             auth.user ? (
-                                <span>
-                                    <button onClick={handleLogout} className="btn  btn-sm btn-outline-danger mx-1">
-                                        <BiLogOut /> Logout
-                                    </button>
-                                </span>
+                                <>
+                                    <span>
+                                        <NavLink style={{ border: 'none' }} onClick={() => setVisible(true)} className="nav-link big">  <BiLogOut style={{ color: 'black', fontSize: '20px' }} /> Logout </NavLink>
+                                    </span>
+                                    <NavLink to='/profile' style={{ border: 'none', fontSize: '25px' }} className="mx-1 big">
+                                        <CiUser style={{ color: 'black' }} />
+                                    </NavLink>
+                                </>
                             ) :
                                 (<>
-                                    <NavLink to='/register' style={{ border: 'none' }} className="mx-1"><button className="btn btn-sm  btn-outline-primary">
+                                    <NavLink to='/register' style={{ border: 'none' }} className="mx-1 big"><button className="btn btn-sm  btn-outline-primary">
                                         Register
                                     </button></NavLink>
 
-                                    <NavLink to='/login' style={{ border: 'none' }} className="mx-1 "><button className="btn btn-sm  btn-primary">
+                                    <NavLink to='/login' style={{ border: 'none' }} className="mx-2 big "><button className="btn btn-sm  btn-primary">
                                         login
                                     </button></NavLink>
                                 </>)
                         }
 
-                        <NavLink to='/wishlist' style={{ border: 'none' }} className="mx-1"><button className="btn btn-sm  btn-outline-danger">
-                            <FaHeart />
-                        </button></NavLink>
+
+
+                        <NavLink to='/wishlist' style={{ border: 'none' }} className="me-3  big"><FaHeart style={{ color: 'black' }} /></NavLink>
 
                     </div>
                     {/* </div> */}
                 </div>
             </nav>
+            <>
+                <Modal styles={{ height: 'fit-content' }} onCancel={() => setVisible(false)} footer={null} open={visible} >
+                    <div className='d-flex ' style={{ flexDirection: 'column' }}>
+                        <p style={{ fontSize: '20px' }}> Are you sure you want to logout ?</p>
 
+                        <span style={{ display: 'flex', justifyContent: 'space-around' }}>
+                            <button onClick={() => { setVisible(false) }} className='btn btn-secondary'>
+                                Cancel
+                            </button>
+                            <button onClick={() => handleLogout()} className='btn btn-outline-danger'>
+                                Logout
+                            </button>
+                        </span>
+                    </div>
+                </Modal>
+            </>
         </>
     )
 }

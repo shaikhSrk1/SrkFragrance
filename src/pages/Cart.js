@@ -6,6 +6,7 @@ import { useAuth } from '../context/auth.js';
 import toast from 'react-hot-toast';
 import { useCart } from '../context/cart.js';
 import { useWishlist } from '../context/wish.js';
+import Checkout from './Checkout.js';
 
 
 const Cart = () => {
@@ -182,7 +183,7 @@ const Cart = () => {
                                                 auth.user == null ?
                                                     <button onClick={() => navigate("/login", { state: "/cart" })} className='btn btn-warning'>Login to checkout</button>
                                                     :
-                                                    <button className='btn btn-warning'>Add Delivery Details</button>
+                                                    <button onClick={() => navigate('/checkout')} className='btn btn-warning'>Add Delivery Details</button>
 
                                             }
                                         </span>

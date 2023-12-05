@@ -17,6 +17,8 @@ import Messages from './pages/Admin/Messages';
 import Cart from './pages/Cart';
 import Myorders from './pages/Myorders';
 import Wishlist from './pages/Wishlist';
+import Checkout from './pages/Checkout';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -36,9 +38,11 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Signup />} />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/policy' element={<Policy />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/checkout' element={<Checkout />} />
         <Route path='/wishlist' element={<Wishlist />} />
         <Route path='/myorders' element={<Myorders />} />
         <Route path='/*' element={<PageNotFound />} />
