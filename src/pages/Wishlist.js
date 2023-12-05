@@ -6,108 +6,68 @@ import Spinner2 from '../Components/Spinner2.js';
 import { useAuth } from '../context/auth.js';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useWishlist } from '../context/wish.js';
+import { useCart } from '../context/cart.js';
 
 const Wishlist = () => {
 
     const navigate = useNavigate();
-    const [auth, setAuth] = useAuth()
-    const [totalItem, setTotalItem] = useState(0)
-    const [loading, setLoading] = useState(false);
-    const [items, setItems] = useState()
+
+    const [wish, setWish] = useWishlist();
+    const [cart, setCart] = useCart()
 
     const foo = () => {
         navigate('/')
     }
 
-    const getItems = async () => {
-        if (auth.user == null) {
-            setTotalItem(0);
-            setLoading(true)
-            return;
-        }
-        try {
-            const item = await axios.get(`${process.env.REACT_APP_API}api/v1/wish/get-items/${auth.user._id}`);
-            // prod = await prod.json();
-            console.log(item.data.items)
-            if (item) {
-                setItems(item.data.items);
-                setLoading(true)
-                setTotalItem(item.data.items.length)
-                console.log(totalItem)
-            }
-        } catch (e) {
-            console.log('error in fetching cart products');
-            return
-        }
-    }
 
 
-    useEffect(() => {
-        getItems();
-    }, [])
-
-    const addtocart = async (e, id, name) => {
+    const addtocart = (e, m) => {
         e.preventDefault();
-        if (auth.user) {
-            try {
-                console.log(auth.user._id)
-                const prod = await axios.post(`${process.env.REACT_APP_API}api/v1/cart/add-item-cart`, { product: id, user: auth.user._id, quantity: 1 });
-                // prod = await prod.json();
-                if (prod) {
-                    toast.success(`${name} Added to cart`);
-                    let c = auth.items + 1
-                    setAuth({
-                        ...auth,
-                        items: c
-                    })
-                }
-            } catch (error) {
-                toast.error('Product Already in Cart')
+        let x;
+        cart.filter(value => {
+            if (value.item._id == m._id) {
+                x = value
+                cart.pop(value)
             }
+        })
+        if (!x) {
+            setCart([...cart, { qty: 1, item: m }])
+            localStorage.setItem('cart', JSON.stringify([...cart, { qty: 1, item: m }]))
+            toast.success(1 + ' ' + m.name + ' added to cart')
         } else {
-            toast.error('Please Login');
-            navigate('/login')
+            //remove from cart
+            setCart([...cart, { qty: (x.qty + 1), item: m }])
+            toast.success((1) + " more " + m.name + ' added to cart')
+            localStorage.setItem('cart', JSON.stringify([...cart, { qty: (x.qty + 1), item: m }]))
         }
     }
 
-    const removefroWish = async (e, name, id) => {
+    const removeLike = async (e, p) => {
         e.preventDefault();
-        try {
-            const prod = await axios.delete(`${process.env.REACT_APP_API}api/v1/wish/delete-item-wish/${id}/${auth.user._id}`);
-            // prod = await prod.json();
-            if (prod) {
-                toast.success(`${name} removed from Wishlist`, {
-                    style: {
-                        border: '1px solid gray',
-                        padding: '16px',
-                        color: '#713200',
-                    },
-                    iconTheme: {
-                        primary: 'gray',
-                        secondary: '#FFFAEE',
-                    },
-                });
-                getItems();
-            }
-        } catch (error) {
-            toast.error(error.response.data.message)
+        const index = wish.indexOf(p);
+        if (index > -1) { // only splice array when item is found
+            wish.splice(index, 1); // 2nd parameter means remove one item only
         }
+        setWish([...wish])
+        localStorage.setItem('wish', JSON.stringify([...wish]))
+        toast.success(p.name + ' removed from wishlist')
     }
 
-    const Item = ({ name, price, id }) => {
+    const Item = ({ p }) => {
         return (<>
             <div style={{ height: '120px', borderRadius: '10px' }} className='d-flex wishrow justify-content-between p-2 m-2 box'>
                 {/* <div className='d-flex justify-content-between ' style={{ width: '100%' }}> */}
-                <img src={`${process.env.REACT_APP_API}api/v1/product/product-photo/${id}`} alt='Product' style={{ height: '100%', width: '130px' }} />
+                <img src={`${process.env.REACT_APP_API}api/v1/product/product-photo/${p._id}`} alt='Product' style={{ height: '100%', width: '130px' }} />
                 <span className='d-flex justify-content-center ' style={{ flexDirection: 'column' }}>
-                    <p className='m-0'> {name} </p>
-                    <h3>&#8377;{price}</h3>
+                    <p className='m-0'> {p.name} </p>
+                    <h3>&#8377;{p.price}</h3>
                 </span>
                 <span style={{ flexDirection: 'column', display: 'flex', justifyContent: 'space-around' }}>
-                    <button className='btn btn-sm btn-outline-danger' onClick={(e) => removefroWish(e, name, id)}>
+                    <button className='btn btn-sm btn-outline-danger' onClick={(e) => removeLike(e, p)}>
                         Remove
                     </button>
-                    <button className='btn btn-sm btn-primary' onClick={(e) => { addtocart(e, id, name) }}>
+                    <button className='btn btn-sm btn-primary' onClick={(e) => { addtocart(e, p) }}>
                         Add to cart
                     </button>
                 </span>
@@ -117,35 +77,28 @@ const Wishlist = () => {
     }
     return (
         <Layout>
-            {
-                loading ? <>
-                    {
-                        totalItem > 0 ?
-                            <div id='cart' className='d-flex wishrow my-3' style={{ minWidth: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                {/* <div className='d-flex align-items-start justify-content-center p-2' style={{ minHeight: '30vh', flexDirection: 'column', minWidth: '45%' }}> */}
-                                {items?.map((item) =>
-                                    <Item
-                                        name={item.name}
-                                        price={item.price}
-                                        id={item.product}
-                                        wid={item._id}
-                                    />
-
-                                )}
-                                {/* </div> */}
-                            </div>
-                            :
-                            <div style={{ height: '80vh', flexDirection: 'column' }} className='d-flex justify-content-center align-items-center'>
-                                <h4> Nothing in your wishList</h4>
-                                <img style={{ width: '40vh' }} src={noWish} />
-                                <button onClick={foo} className='btn btn-outline-secondary'>
-                                    Return to Home
-                                </button>
-                            </div>
-                    }
-                </>
-                    :
-                    <Spinner2 />
+            {<>
+                {
+                    wish?.length > 0 ?
+                        <div id='cart' className='d-flex wishrow my-3' style={{ minWidth: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            {/* <div className='d-flex align-items-start justify-content-center p-2' style={{ minHeight: '30vh', flexDirection: 'column', minWidth: '45%' }}> */}
+                            {wish?.map((item) =>
+                                <Item
+                                    p={item}
+                                />
+                            )}
+                            {/* </div> */}
+                        </div>
+                        :
+                        <div style={{ height: '80vh', flexDirection: 'column' }} className='d-flex justify-content-center align-items-center'>
+                            <h4> Nothing in your wishList</h4>
+                            <img style={{ width: '40vh' }} src={noWish} />
+                            <button onClick={foo} className='btn btn-outline-secondary'>
+                                Return to Home
+                            </button>
+                        </div>
+                }
+            </>
             }
         </Layout>
     )

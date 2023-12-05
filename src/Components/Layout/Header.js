@@ -8,11 +8,12 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
+import { useCart } from '../../context/cart';
 
 const Header = () => {
     const navigate = useNavigate();
     const [auth, setAuth] = useAuth();
-
+    const [cart, setCart] = useCart();
     const handleLogout = () => {
         setAuth({
             ...auth,
@@ -106,7 +107,7 @@ const Header = () => {
                                 <NavLink to='/cart' className="nav-link" style={{ position: 'relative' }}>
                                     Cart <AiOutlineShoppingCart className='me-1' style={{ fontSize: '25px' }} />
                                     <span id='number' className='px-2' style={{ position: 'relative', bottom: '9px', right: '9px' }}>
-                                        {auth.user == null ? 0 : auth.items}
+                                        {cart?.length}
                                     </span>
                                 </NavLink>
                             </li>

@@ -14,9 +14,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
-    const [auth, setAuth] = useAuth();
     const [loading, setLoading] = useState(true);
-    const [wish, setWish] = useState([])
+
     const navigate = useNavigate()
 
     const getAllProducts = async () => {
@@ -71,16 +70,11 @@ const Home = () => {
                 {
                     loading ? (<Spinner2 />) : <>
                         {products ? products?.map((item, i) =>
-                            < Card
-                                Name={item.name}
-                                Feature={item.features}
-                                Price={item.price}
-                                Id={item._id}
-                                Description={item.description ? item.description : ''}
-                            />
-
-
-                        )
+                            item ?
+                                < Card
+                                    Product={item}
+                                /> :
+                                '')
                             :
                             'No products in your shop. start Adding'}
                     </>

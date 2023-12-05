@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './auth.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Layout from '../../Components/Layout/Layout'
 import { useAuth } from '../../context/auth';
 import toast from 'react-hot-toast';
@@ -11,6 +11,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -22,8 +23,7 @@ const Login = () => {
                 if (resp.data.user.role === 1) {
                     navigate('/dashboard/products')
                 } else {
-                    navigate('/')
-
+                    navigate(location.state || "/");
                 }
                 setAuth({
                     ...auth,
