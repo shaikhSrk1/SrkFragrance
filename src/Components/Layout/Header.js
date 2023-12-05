@@ -4,6 +4,7 @@ import './Header.css';
 import { useAuth } from '../../context/auth';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { BiLogOut } from 'react-icons/bi';
+import { CiLogin } from "react-icons/ci";
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { CiHeart } from "react-icons/ci";
@@ -40,23 +41,16 @@ const Header = () => {
                 <Link to='/about' style={{}} id='brand' className=""> <h5 className='m-0'>Aromas Haven</h5></Link >
                 {/* <div className="container-fluid"> */}
 
-                <ul style={{ display: 'flex' }} className="m-0 p-0 ms-auto">
 
-                    {
-                        auth.user ? (
-                            <span>
-                                <button onClick={handleLogout} className="btn nav-2btn btn-sm btn-outline-warning mx-1">
-                                    <BiLogOut /> Logout
-                                </button>
-                            </span>
-                        ) :
-                            (<>
-                                <NavLink to='/login' style={{ border: 'none' }} className="mx-1 "><button className="btn nav-2btn btn-sm btn-primary">
-                                    login
-                                </button></NavLink>
-                            </>)
-                    }
-                    <NavLink to='/wishlist' style={{ border: 'none' }} className="mx-1"><button className="btn btn-sm nav-2btn btn-outline-danger">
+                {/* phone navbar */}
+                <ul style={{ display: 'flex' }} className="m-0 p-0">
+                    <NavLink to='/cart' className="nav-link  phone" style={{ position: 'relative' }}>
+                        Cart <AiOutlineShoppingCart className='me-1 ' style={{ fontSize: '25px' }} />
+                        <span id='number' className='px-2' style={{ position: 'relative', bottom: '9px', right: '9px' }}>
+                            {cart?.length}
+                        </span>
+                    </NavLink>
+                    <NavLink to='/wishlist' style={{ border: 'none' }} className="mx-1  phone"><button className="btn btn-sm nav-2btn btn-outline-danger">
                         <FaHeart />
                     </button></NavLink>
 
@@ -102,40 +96,56 @@ const Header = () => {
                             <li className="nav-item">
                                 <NavLink to='/contact' className="nav-link">Contact Us</NavLink>
                             </li>
-                            <li>
+                            <li className='nav-item'>
 
-                                <NavLink to='/cart' className="nav-link" style={{ position: 'relative' }}>
-                                    Cart <AiOutlineShoppingCart className='me-1' style={{ fontSize: '25px' }} />
-                                    <span id='number' className='px-2' style={{ position: 'relative', bottom: '9px', right: '9px' }}>
-                                        {cart?.length}
-                                    </span>
-                                </NavLink>
+
+
+                                {
+                                    auth.user ? (
+                                        <span>
+                                            <NavLink to='/login' onClick={handleLogout} className="nav-link phone">  <BiLogOut /> Logout </NavLink>
+                                        </span>
+                                    ) :
+                                        (<>
+                                            <li className="nav-item phone">
+                                                <NavLink to='/login' className="nav-link btn-primary btn">
+                                                    <CiLogin /> Login
+                                                </NavLink>
+                                            </li>
+                                        </>)
+                                }
                             </li>
+                            <NavLink to='/cart' className="nav-link big" style={{ position: 'relative' }}>
+                                Cart <AiOutlineShoppingCart className='me-1 ' style={{ fontSize: '25px' }} />
+                                <span id='number' className='px-2' style={{ position: 'relative', bottom: '9px', right: '9px' }}>
+                                    {cart?.length}
+                                </span>
+                            </NavLink>
                         </ul>)
                     }
 
-                    <div className="ms-auto navbar-nav">
+                    <div className="ms-auto navbar-nav big">
 
                         {
                             auth.user ? (
                                 <span>
-                                    <button onClick={handleLogout} className="btn nav-btn btn-sm btn-outline-danger mx-1">
+                                    <button onClick={handleLogout} className="btn  btn-sm btn-outline-danger mx-1">
                                         <BiLogOut /> Logout
                                     </button>
                                 </span>
                             ) :
                                 (<>
-                                    <NavLink to='/register' style={{ border: 'none' }} className="mx-1"><button className="btn btn-sm nav-btn btn-outline-primary">
+                                    <NavLink to='/register' style={{ border: 'none' }} className="mx-1"><button className="btn btn-sm  btn-outline-primary">
                                         Register
                                     </button></NavLink>
 
-                                    <NavLink to='/login' style={{ border: 'none' }} className="mx-1 "><button className="btn btn-sm nav-btn btn-primary">
+                                    <NavLink to='/login' style={{ border: 'none' }} className="mx-1 "><button className="btn btn-sm  btn-primary">
                                         login
                                     </button></NavLink>
                                 </>)
                         }
 
-                        <NavLink to='/wishlist' style={{ border: 'none' }} className="mx-1"><button className="btn btn-sm nav-btn btn-outline-danger">
+                        <NavLink to='/wishlist' style={{ border: 'none' }} className="mx-1"><button className="btn btn-sm  btn-outline-danger">
                             <FaHeart />
                         </button></NavLink>
 

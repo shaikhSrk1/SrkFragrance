@@ -33,6 +33,11 @@ const Home = () => {
         }
     }
 
+    const handleScroll = () => {
+        const section = document.querySelector('#toShow');
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
 
     useEffect(() => {
         getAllProducts();
@@ -47,7 +52,7 @@ const Home = () => {
                 <div style={{ backgroundColor: '', zIndex: '' }} className='batul p-2 ' >
                     <h1>Aromas Haven</h1>
                     <p>Welcome to Aroma Haven ! Our passion for scents and dedication to quality make us your ideal choice for all things perfume </p>
-                    {/* <button className='btn btn-secondary' onClick={() => { handleScroll() }}> Start Shopping</button> */}
+                    <button className='btn btn-secondary' onClick={() => { handleScroll() }}> Start Shopping</button>
                 </div>
             </div>
             <div className='container' style={{}} id='show'>
@@ -65,21 +70,24 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className="container my-4 box-3 d-flex" style={{ width: '100%', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
-                {/* <div className="row" > */}
+            <div className="container my-4 box-3 d-flex" id='toShow' style={{ width: '100%', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+
                 {
-                    loading ? (<Spinner2 />) : <>
-                        {products ? products?.map((item, i) =>
-                            item ?
-                                < Card
-                                    Product={item}
-                                /> :
-                                '')
-                            :
-                            'No products in your shop. start Adding'}
-                    </>
+                    loading ?
+                        (<Spinner2 />)
+                        :
+                        <>
+                            {products ? products?.map((item, i) =>
+                                item ?
+                                    < Card
+                                        Product={item}
+                                    /> :
+                                    '')
+                                :
+                                'No products in your shop. start Adding'}
+                        </>
                 }
-                {/* </div> */}
+
             </div>
 
         </Layout>

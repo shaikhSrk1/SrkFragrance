@@ -18,8 +18,6 @@ export const Card = ({ Product }) => {
     const [count, setCount] = useState(1);
     const [modal, setModal] = useState()
 
-    const navigate = useNavigate();
-
 
     useEffect(() => {
         console.log(wish)
@@ -187,11 +185,13 @@ export const Card = ({ Product }) => {
                                         +
                                     </button>
                                 </div>
-                                {inCart(modal) ? (<button onClick={(e) => removefromCart(e, modal)} className="btn btn-success rounded-pill ">
-                                    <MdShoppingCart />remove from cart
-                                </button>) : <button onClick={(e) => addToCart(e, modal)} className="btn btn-outline-success rounded-pill ">
-                                    <MdShoppingCart /> Add to Cart
-                                </button>}
+                                {
+                                    inCart(modal) ? (<button onClick={(e) => removefromCart(e, modal)} className="btn btn-success rounded-pill ">
+                                        <MdShoppingCart />remove from cart
+                                    </button>) : <button onClick={(e) => addToCart(e, modal)} className="btn btn-outline-success rounded-pill ">
+                                        <MdShoppingCart /> Add to Cart
+                                    </button>
+                                }
                             </div>
 
                             <div className="text-center">

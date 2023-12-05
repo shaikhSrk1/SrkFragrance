@@ -71,6 +71,10 @@ p {
 
 @media only screen and (max-width: 500px) {
 
+  .nav-link {
+    border: none !important;
+  }
+
   .form-container {
     padding-left: 0px;
     padding-right: 0px;

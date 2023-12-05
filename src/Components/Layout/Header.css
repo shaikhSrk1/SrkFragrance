@@ -6,6 +6,24 @@
     margin: 25px;
 }
 
+.phone {
+    display: none;
+}
+
+.big {
+    display: block;
+}
+
+@media only screen and (max-width: 850px) {
+    .big {
+        display: none;
+    }
+
+    .phone {
+        display: block;
+    }
+}
+
 @media only screen and (max-width: 999px) {
     #brand {
         font-size: 15px;
@@ -15,6 +33,7 @@
 .nav-link,
 .navbar {
     background-color: whitesmoke !important;
+    text-align: center;
 }
 
 .batul {

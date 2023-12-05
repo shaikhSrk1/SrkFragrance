@@ -164,7 +164,7 @@ const Cart = () => {
                                         <span>- &#8377;{bill?.discount}</span>
                                     </div>
                                     {
-                                        bill?.discount === 0 ? <div class="alert p-2 alert-danger" role="alert">
+                                        bill?.discount == 0.0 ? <div class="alert p-2 alert-danger" role="alert">
                                             Get 10% OFF on Orders above &#8377;300
                                         </div> : <></>
                                     }
