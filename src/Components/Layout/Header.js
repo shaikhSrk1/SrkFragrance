@@ -37,6 +37,7 @@ const Header = () => {
                 secondary: '#FFFAEE',
             },
         });
+        setVisible(false)
         navigate('/');
     }
     return (
@@ -113,7 +114,7 @@ const Header = () => {
                                 {
                                     auth.user ? (
                                         <span>
-                                            <NavLink to='/login' onClick={() => setVisible(true)} className="nav-link phone">  <BiLogOut /> Logout </NavLink>
+                                            <NavLink onClick={() => setVisible(true)} className="nav-link phone">  <BiLogOut /> Logout </NavLink>
                                         </span>
                                     ) :
                                         (<>

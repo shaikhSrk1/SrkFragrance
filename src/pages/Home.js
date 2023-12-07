@@ -1,10 +1,8 @@
 import React, { useRef } from 'react'
 import Layout from '../Components/Layout/Layout.js'
-import { useAuth } from '../context/auth.js';
 // import Card from 'antd/es/card/Card.js';
 import { Card } from '../Components/Card.js';
 import './Home.css';
-import { MdShoppingCart } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { FaSearch } from "react-icons/fa";
 import axios from 'axios';
@@ -46,7 +44,6 @@ const Home = () => {
 
     return (
         <Layout>
-            {/* <pre> {JSON.stringify(auth, null, 4)}</pre> */}
 
             <div style={{ position: 'relative', height: '50vh', width: '100%' }} className='fluid-container no-phone' id='wall'>
                 <div style={{ backgroundColor: '', zIndex: '' }} className='batul p-2 ' >

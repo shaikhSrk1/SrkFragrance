@@ -6,7 +6,6 @@ import { useAuth } from '../context/auth.js';
 import toast from 'react-hot-toast';
 import { useCart } from '../context/cart.js';
 import { useWishlist } from '../context/wish.js';
-import Checkout from './Checkout.js';
 
 
 const Cart = () => {
@@ -14,6 +13,7 @@ const Cart = () => {
     const [bill, setBill] = useState({});
     const [cart, setCart] = useCart();
     const [wish, setWish] = useWishlist();
+    const [total, setTotal] = useState(0)
 
     const navigate = useNavigate();
 
@@ -32,7 +32,6 @@ const Cart = () => {
         }
         setWish([...wish, p])
         localStorage.setItem('wish', JSON.stringify([...wish, p]))
-
         toast.success(p.name + ' moved to wishlist');
     }
 
@@ -58,6 +57,7 @@ const Cart = () => {
             setCart([...cart])
             calculateBill()
         }
+        localStorage.setItem('cart', JSON.stringify([...cart]))
     }
 
     const plus = (e, p) => {
@@ -68,16 +68,19 @@ const Cart = () => {
             setCart([...cart]);
             calculateBill()
         }
+        localStorage.setItem('cart', JSON.stringify([...cart]))
     }
 
     const calculateBill = () => {
+
         var x = 0;
         cart?.forEach(element => {
             // alert(element.item.price)
             console.log(element.item.price * element.qty)
             x = x + element.item.price * element.qty
         });
-        console.log(x)
+        console.log(x);
+        setTotal(x);
 
         var discount = 0;
         if (x > 299) {
@@ -86,20 +89,31 @@ const Cart = () => {
         discount = discount.toFixed(2)
         let shipping = 40
 
-        setBill({
-            ...bill,
+        const i = {
             mrp: x,
             discount: discount,
             shipping: shipping,
             subTotal: (x + shipping - discount)
-        })
-        localStorage.setItem('cart', JSON.stringify(cart))
+        }
+        setBill(i)
+        setAuth({
+            ...auth,
+            bill: i
+        });
+
+        localStorage.setItem('auth', JSON.stringify({
+            ...auth,
+            bill: i
+        }))
+    }
+
+    const Checkout = () => {
+        navigate('/checkout');
     }
 
     useEffect(() => {
         calculateBill()
-
-    }, [])
+    }, [total])
 
     const Item = ({ p }) => {
         return (<>
@@ -135,6 +149,7 @@ const Cart = () => {
     }
 
     return (
+
         <Layout>
             {/* <pre> {JSON.stringify(bill)}</pre> */}
             {
@@ -147,51 +162,73 @@ const Cart = () => {
                                     p={item}
                                 />
                             )}
-                        </div>
-                        <div className='cartParent p-3 me-4 mt-3'>
-                            <div className='p-0'>
-                                <h4 className='p-2' style={{ backgroundColor: 'gray' }}>PRICE SUMMARY</h4>
-                                <div className='m-3'>
-                                    <div className='d-flex item justify-content-between mx-2'>
-                                        <p>Total MRP (Incl. of taxes)</p>
-                                        <span> &#8377;{bill?.mrp}</span>
-                                    </div>
-                                    <div className='d-flex item justify-content-between mx-2'>
-                                        <p>Shipping Charges</p>
-                                        <span> &#8377;{bill?.shipping}</span>
-                                    </div>
-                                    <div className='d-flex justify-content-between mx-2'>
-                                        <p>Bag Discount</p>
-                                        <span>- &#8377;{bill?.discount}</span>
-                                    </div>
-                                    {
-                                        bill?.discount == 0.0 ? <div class="alert p-2 alert-danger" role="alert">
-                                            Get 10% OFF on Orders above &#8377;300
-                                        </div> : <></>
-                                    }
-                                    <div className='d-flex justify-content-between mx-2'>
-                                        <p className='font'>Subtotal </p>
-                                        <span className='font'> &#8377;{bill?.subTotal}</span>
-                                    </div>
-                                    <div className='d-flex mt-4 py-2 align-items-center justify-content-between' style={{ borderTop: '1px solid gray' }}>
-                                        <span>
-                                            <span className='m-0'>Total </span>
-                                            <span className='font'> &#8377;{bill?.subTotal}/-</span>
-                                        </span>
-                                        <span>
-                                            {
-                                                auth.user == null ?
-                                                    <button onClick={() => navigate("/login", { state: "/cart" })} className='btn btn-warning'>Login to checkout</button>
-                                                    :
-                                                    <button onClick={() => navigate('/checkout')} className='btn btn-warning'>Add Delivery Details</button>
 
-                                            }
-                                        </span>
-                                    </div>
+                        </div>
+
+                        <ul className="pt-5 list-group list-group2  " >
+                            <p style={{ margin: '5px auto' }}>You're paying for</p>
+                            {
+                                cart?.map((i) =>
+                                    <li className="list-group-item d-flex justify-content-between lh-condensed">
+                                        <div>
+                                            <h6 className="my-0">{i.item.name}</h6>
+                                            <small className="text-muted">&#8377;{i.item.price}{i.qty == "1" ? '' : ' X' + i.qty}</small>
+                                        </div>
+                                        <span className="text-muted">&#8377;{i.item.price * i.qty}</span>
+                                    </li>
+                                )
+                            }
+
+                            <li className="list-group-item d-flex justify-content-between">
+                                <span>MRP (INR)</span>
+                                <strong>&#8377;{bill?.mrp}</strong>
+                            </li>
+                        </ul>
+                    </div>
+                    <div style={{ margin: 'auto' }} className='cartParent p-3  mt-3'>
+                        <div className='p-0'>
+                            <h4 className='p-2' style={{ backgroundColor: 'gray' }}>PRICE SUMMARY</h4>
+                            <div className='m-3'>
+                                <div className='d-flex item justify-content-between mx-2'>
+                                    <p>Total MRP (Incl. of taxes)</p>
+                                    <span> &#8377;{bill?.mrp}</span>
+                                </div>
+                                <div className='d-flex item justify-content-between mx-2'>
+                                    <p>Shipping Charges</p>
+                                    <span> &#8377;{bill?.shipping}</span>
+                                </div>
+                                <div className='d-flex justify-content-between mx-2'>
+                                    <p>Bag Discount</p>
+                                    <span>- &#8377;{bill?.discount}</span>
+                                </div>
+                                {
+                                    bill?.discount == 0.0 ? <div class="alert p-2 alert-danger" role="alert">
+                                        Get 10% OFF on Orders above &#8377;300
+                                    </div> : <></>
+                                }
+                                <div className='d-flex justify-content-between mx-2'>
+                                    <p className='font'>Subtotal </p>
+                                    <span className='font'> &#8377;{bill?.subTotal}</span>
+                                </div>
+                                <div className='d-flex mt-4 py-2 align-items-center justify-content-between' style={{ borderTop: '1px solid gray' }}>
+                                    <span>
+                                        <span className='m-0'>Total </span>
+                                        <span className='font'> &#8377;{bill?.subTotal}/-</span>
+                                    </span>
+                                    <span>
+                                        {
+                                            auth.user == null ?
+                                                <button onClick={() => navigate("/login", { state: "/cart" })} className='btn btn-warning'>Login to checkout</button>
+                                                :
+                                                <button onClick={Checkout} className='btn btn-warning'> Checkout</button>
+
+                                        }
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </>
                     :
                     <div style={{ height: '80vh', flexDirection: 'column' }} className='d-flex justify-content-center align-items-center'>

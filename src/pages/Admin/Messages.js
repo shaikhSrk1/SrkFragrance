@@ -4,7 +4,7 @@ import Layout from '../../Components/Layout/Layout'
 const Messages = () => {
     return (
         <Layout>
-            <h1>Messages</h1>
+            <h1>Manage Users</h1>
         </Layout>
     )
 }

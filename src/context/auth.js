@@ -6,6 +6,7 @@ const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({
         user: null,
         token: "",
+        items: {}
     });
 
     axios.defaults.headers.common['Authorization'] = auth?.token;
@@ -19,7 +20,8 @@ const AuthProvider = ({ children }) => {
             setAuth({
                 ...auth,
                 user: parseData.user,
-                token: parseData.token
+                token: parseData.token,
+                bill: parseData.bill
             })
         }
     }, []);  //[auth]

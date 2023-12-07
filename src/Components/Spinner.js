@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Spinner = () => {
     const [count, setCount] = useState(3);
     const navigate = useNavigate();
+
     useEffect(() => {
         const interval = setInterval(() => {
             setCount((prev) => --prev);

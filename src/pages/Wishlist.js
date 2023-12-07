@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../Components/Layout/Layout';
-import axios from 'axios';
 import noWish from '../photos/empty-wishlist.png'
-import Spinner2 from '../Components/Spinner2.js';
-import { useAuth } from '../context/auth.js';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useWishlist } from '../context/wish.js';
@@ -19,7 +16,6 @@ const Wishlist = () => {
     const foo = () => {
         navigate('/')
     }
-
 
 
     const addtocart = (e, m) => {

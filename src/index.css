@@ -11,6 +11,10 @@
   width: 100vw !important;
 }
 
+.list-group2 {
+  width: 40%;
+}
+
 html,
 body {
   width: 100%;
@@ -73,6 +77,11 @@ p {
 
   .nav-link {
     border: none !important;
+  }
+
+  .list-group {
+    width: 80%;
+    margin: auto;
   }
 
   .form-container {

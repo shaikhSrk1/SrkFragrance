@@ -1,6 +1,5 @@
 
-import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -19,8 +18,21 @@ import Myorders from './pages/Myorders';
 import Wishlist from './pages/Wishlist';
 import Checkout from './pages/Checkout';
 import Profile from './pages/Profile';
+import { useEffect } from 'react';
+import Ordersuccess from './pages/Ordersuccess';
 
 function App() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // if (pathname != '/order-success') {
+    const section = document.querySelector('#stoTop');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // }
+  }, [pathname])
+
   return (
     <>
       <Toaster
@@ -42,11 +54,13 @@ function App() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/policy' element={<Policy />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/order-success' element={<Ordersuccess />} />
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/wishlist' element={<Wishlist />} />
         <Route path='/myorders' element={<Myorders />} />
         <Route path='/*' element={<PageNotFound />} />
       </Routes>
+
     </>
   );
 }

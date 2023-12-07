@@ -29,7 +29,6 @@ const Login = () => {
                     ...auth,
                     user: resp.data.user,
                     token: resp.data.token,
-                    items: resp.data.items
                 });
                 localStorage.setItem('auth', JSON.stringify(resp.data));
             } else {
