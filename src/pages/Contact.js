@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../Components/Layout/Layout'
 import './contact.css';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
 import '../index.css'
 
 
 const Contact = () => {
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [msg, setMsg] = useState();
+
+    const sendmsg = async () => {
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_API}api/v1/manage/send`, { name, email, msg });
+
+            if (res) {
+                toast.success('Message sent')
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <Layout>
             <div style={{ minHeight: '60vh' }} className='contact box-2 container-md  p-0 d-flex mt-5' >
@@ -34,11 +52,11 @@ const Contact = () => {
                 <div className='container m-0' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <h1 className='m-3'>Get in touch</h1>
                     <div className="row m-4">
-                        <input type="text" className="form-control m-2" placeholder='Name' />
-                        <input type="email" className="form-control m-2" placeholder='Email' />
-                        <input type="textArea" className="form-control m-2" placeholder='Message' />
+                        <input type="text" value={name} onChange={e => setName(e.target.value)} className="form-control m-2" placeholder='Name' />
+                        <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="form-control m-2" placeholder='Email' />
+                        <input type="textArea" value={msg} onChange={e => setMsg(e.target.value)} className="form-control m-2" placeholder='Message' />
                     </div>
-                    <button type="submit" className="btn px-3 btn-outline-primary btn mb-4">Send Message</button>
+                    <button type="submit" onClick={sendmsg} className="btn px-3 btn-outline-primary btn mb-4">Send Message</button>
 
 
                 </div >

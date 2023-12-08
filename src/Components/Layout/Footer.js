@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Footer.css'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
 
 const Footer = () => {
+
+    const [email, setEmail] = useState();
+
+    const sendmsg = async (e) => {
+        e.preventDefault()
+        try {
+            if (email) {
+
+                const res = await axios.post(`${process.env.REACT_APP_API}api/v1/manage/sub`, { email });
+                if (res) {
+                    toast.success('Thankyou for Subscribing')
+                }
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
     return (
         <>
             <footer className="footer text-center text-white" style={{ backgroundColor: '#908f89' }}>
@@ -16,11 +35,10 @@ const Footer = () => {
                                     </p>
                                 </div>
                                 <div className="col-md-5 col-12">
-                                    <input type="email" id="form5Example2" className="form-control" placeholder='Your Email' />
-
+                                    <input type="email" id="form5Example2" className="form-control" value={email} onChange={e => setEmail(e.target.value)} placeholder='Your Email' />
                                 </div>
                                 <div className="col-auto">
-                                    <button type="submit" className="btn btn-outline-warning mb-3">
+                                    <button type="submit" onClick={(e) => sendmsg(e)} className="btn btn-outline-warning mb-3">
                                         Send
                                     </button>
                                 </div>

@@ -1,0 +1,7 @@
+.user-box span {
+    border: 1px solid gray;
+}
+
+.user-box {
+    align-items: center;
+}

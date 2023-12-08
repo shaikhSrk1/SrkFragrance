@@ -10,7 +10,6 @@ const Profile = () => {
     const navigate = useNavigate()
     return (
         <Layout>
-            <pre> {JSON.stringify(auth, null, 4)}</pre>
             {
                 auth.token ? <div className='container d-flex my-5' style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                     <h1>My Profile</h1>

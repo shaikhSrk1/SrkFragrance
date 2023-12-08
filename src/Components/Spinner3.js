@@ -10,8 +10,10 @@ const Spinner3 = () => {
         const interval = setInterval(() => {
             setCount((prev) => --prev);
         }, 1000)
-        count === 0 && navigate('/order-success')
-        return () => clearInterval(interval);
+        if (count === 0) {
+
+            return () => clearInterval(interval);
+        }
     }, [count, navigate]);
 
     return (

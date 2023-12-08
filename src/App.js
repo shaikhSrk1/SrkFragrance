@@ -12,7 +12,6 @@ import Private from './Components/Routes/Private';
 import Products from './pages/Admin/Products';
 import Addproducts from './pages/Admin/Addproducts';
 import Orders from './pages/Admin/Orders';
-import Messages from './pages/Admin/Messages';
 import Cart from './pages/Cart';
 import Myorders from './pages/Myorders';
 import Wishlist from './pages/Wishlist';
@@ -20,6 +19,7 @@ import Checkout from './pages/Checkout';
 import Profile from './pages/Profile';
 import { useEffect } from 'react';
 import Ordersuccess from './pages/Ordersuccess';
+import Manage from './pages/Admin/Manage';
 
 function App() {
   const { pathname } = useLocation();
@@ -45,7 +45,7 @@ function App() {
           <Route path='/dashboard/products' element={<Products />} />
           <Route path='/dashboard/addproduct' element={<Addproducts />} />
           <Route path='/dashboard/orders' element={<Orders />} />
-          <Route path='/dashboard/messages' element={<Messages />} />
+          <Route path='/dashboard/messages' element={<Manage />} />
         </Route>
         <Route path='/about' element={<About />} />
         <Route path='/login' element={<Login />} />

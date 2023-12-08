@@ -86,7 +86,7 @@ const Header = () => {
                                 <NavLink to='/dashboard/orders' className="nav-link" aria-current="page">Orders</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to='/dashboard/messages' className="nav-link">Messages</NavLink>
+                                <NavLink to='/dashboard/messages' className="nav-link">Manage Users</NavLink>
                             </li>
                             <li>
                                 <NavLink to='/cart' className="nav-link" style={{ position: 'relative' }}>

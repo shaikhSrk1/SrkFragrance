@@ -17,11 +17,11 @@ const Checkout = () => {
     const [total, setTotal] = useState();
     const [auth, setAuth] = useAuth();
     const [fname, setFname] = useState(auth?.user?.name);
-    const [lname, setLname] = useState();
+    const [lname, setLname] = useState(auth?.user?.lname);
     const [email, setEmail] = useState(auth?.user?.email);
-    const [address, setAddress] = useState();
+    const [address, setAddress] = useState(auth?.user?.address);
     const [paymentoption, setPaymentoption] = useState("pod");
-    const [phone, setPhone] = useState();
+    const [phone, setPhone] = useState(auth?.user?.phone);
     const [visible, setVisible] = useState(false);
     const [isDone, setIsDone] = useState(false)
 
@@ -73,8 +73,10 @@ const Checkout = () => {
 
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
-        setVisible(false)
+        setIsDone(true)
+        // setVisible(false)
         const userDetail = {
             fname: fname,
             lname: lname,
@@ -94,7 +96,8 @@ const Checkout = () => {
         const response = await axios.post(`${process.env.REACT_APP_API}api/v1/order/place-order/${auth.user._id}`, { userDetail, cartitems, paymentoption, price: auth?.bill?.subTotal })
 
         if (response.status == 200) {
-            setIsDone(true)
+            setCart([])
+            navigate('/order-success')
         } else {
             toast.error('Something went wrong. Pease Try again later')
             navigate('/cart')
@@ -104,8 +107,6 @@ const Checkout = () => {
     const Bill = () => {
         return (
             <>
-
-
 
                 {
                     cart?.map((i) =>
