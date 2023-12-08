@@ -117,18 +117,18 @@ const Cart = () => {
 
     const Item = ({ p }) => {
         return (<>
-            <div style={{ height: '120px', borderRadius: '10px', flexDirection: 'row' }} className='d-flex cartrow p-2 my-2'>
-                <div className='d-flex justify-content-between' style={{ width: '100%', flexDirection: 'column' }}>
+            <div style={{ width: '360px', height: '120px', borderRadius: '10px', flexDirection: 'row' }} className='d-flex cartrow px-0 py-2 my-2'>
+                <div className='d-flex justify-content-between mx-0' style={{ width: '260px', flexDirection: 'column' }}>
                     <p className='m-0'> {p?.item.name} </p>
                     <div className='d-flex justify-content-around'>
                         <h5 className='mx-2'>&#8377;{p.item.price * p.qty}</h5>
                         <span className='mx-2'>
                             Qty :
-                            <button onClick={(e) => minus(e, p.item)} className="btn mx-1 btn-sm btn-danger ">
+                            <button onClick={(e) => minus(e, p.item)} className="btn mx-1 btn-sm btn-secondary ">
                                 -
                             </button>
                             {p.qty}
-                            <button onClick={(e) => plus(e, p.item)} className="btn mx-1 btn-sm btn-success">
+                            <button onClick={(e) => plus(e, p.item)} className="btn mx-1 btn-sm btn-secondary">
                                 +
                             </button>
                         </span>
@@ -143,7 +143,7 @@ const Cart = () => {
                         </button>
                     </span>
                 </div>
-                <img src={`${process.env.REACT_APP_API}api/v1/product/product-photo/${p.item._id}`} alt='Product' style={{ height: '100%', width: '130px' }} />
+                <img className='p-1' src={`${process.env.REACT_APP_API}api/v1/product/product-photo/${p.item._id}`} alt='Product' style={{ width: '100px' }} />
             </div>
         </>)
     }

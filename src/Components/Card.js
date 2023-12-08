@@ -18,7 +18,6 @@ export const Card = ({ Product }) => {
     const [count, setCount] = useState(1);
     const [modal, setModal] = useState()
 
-
     useEffect(() => {
         console.log(wish)
     })
@@ -145,7 +144,7 @@ export const Card = ({ Product }) => {
                     <p onClick={() => { setModal(Product); setVisible(true) }} className='m-0 p-0'>{Product.features}</p>
                     <div onClick={() => { setModal(Product); setVisible(true) }} className='d-flex align-items-center mt-2 justify-content-between'>
                         <h2 style={{ color: '#383838' }}>&#8377;{Product.price}</h2>
-                        <button onClick={(e) => setVisible(true)} className="btn btn-outline-primary rounded-pill mx-1">
+                        <button onClick={(e) => setVisible(true)} className="btn btn-sm btn-outline-primary rounded-pill mx-1">
                             More Details
                         </button>
                     </div>
@@ -153,18 +152,23 @@ export const Card = ({ Product }) => {
             </div>
             {
                 modal ? <Modal styles={{ height: 'fit-content' }} width={1000} onCancel={() => setVisible(false)} footer={null} open={visible} >
-                    <div className='container box-2 p-0' style={{ width: '100%', height: "100%", display: 'flex' }}>
-                        <div className='container box p-0'>
+                    <div className='container box-2 p-0' style={{ width: '100%', height: "100%", display: 'flex', boxShadow: 'none' }}>
+                        <div className='container box p-0 mb-3'>
                             <label style={{ width: '100%', height: '100%', objectFit: 'cover' }} className='d-flex align-items-center justify-content-center '>
                                 {<img style={{ objectFit: 'cover', height: '100%', width: '100%' }} alt='Product img' src={`${process.env.REACT_APP_API}api/v1/product/product-photo/${modal._id}`} />}
-                                {/* <input type='file' name='photo' hidden accept='image/*' onChange={(e) => { setId(null); setPhoto(e.target.files[0]); }} /> */}
                             </label>
                         </div>
                         <div className='container d-flex justify-content-between' style={{ flexDirection: 'column' }}>
 
                             <div className="" style={{ fontSize: 'large' }}>
-                                <h1 className='mt-2'>{modal.name}</h1>
-                                <p style={{ textAlign: 'left' }}>{modal.features}</p>
+                                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+
+                                    <h1 className='mt-2'>{modal.name} </h1>
+                                    <p style={{ fontSize: '24px', margin: '0px' }}>
+                                        &#8377; {modal.price * count}
+                                    </p>
+                                </span>
+                                <p style={{ textAlign: 'left' }}>{modal.features} </p>
                                 <p style={{ textAlign: 'left' }}>{modal.description}</p>
                             </div>
                             <div className='d-flex justify-content-between px-3' id='details'>
@@ -188,7 +192,7 @@ export const Card = ({ Product }) => {
                                 {
                                     inCart(modal) ? (<button onClick={(e) => removefromCart(e, modal)} className="btn btn-success rounded-pill ">
                                         <MdShoppingCart />remove from cart
-                                    </button>) : <button onClick={(e) => addToCart(e, modal)} className="btn btn-outline-success rounded-pill ">
+                                    </button>) : <button onClick={(e) => addToCart(e, modal)} className="btn btn-outline-success rounded-pill mb-2 ">
                                         <MdShoppingCart /> Add to Cart
                                     </button>
                                 }

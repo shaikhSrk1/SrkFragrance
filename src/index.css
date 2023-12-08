@@ -51,6 +51,7 @@ p {
   width: 60%;
 }
 
+
 .cartrow {
   width: 80%;
   flex-direction: row;
@@ -71,13 +72,35 @@ p {
   font-weight: 500;
 }
 
+.about {
+  height: 60vh;
+}
 
+
+.about img {
+  height: 100%;
+  width: 80%;
+  margin: auto;
+}
 
 @media only screen and (max-width: 500px) {
 
   .nav-link {
     border: none !important;
   }
+
+
+  .about img {
+    height: 300px;
+    width: 300px;
+    margin: 0px 0px;
+  }
+
+  .about {
+    margin-top: 50px;
+    height: 350px;
+  }
+
 
   .list-group {
     width: 80%;
@@ -101,7 +124,8 @@ p {
   .form-container input,
   .contact,
   .info-wrap {
-    width: 95% !important
+    width: 100% !important;
+
   }
 
   .cartParent {

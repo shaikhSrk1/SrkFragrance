@@ -84,17 +84,11 @@
 /* about page */
 
 .about {
-    height: 60vh;
+
     margin-bottom: 20px;
     margin: auto;
     place-content: center;
     display: flex;
     align-items: center;
 
-}
-
-.about img {
-    height: 100%;
-    width: 80%;
-    margin: auto;
 }

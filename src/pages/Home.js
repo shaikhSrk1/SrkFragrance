@@ -53,7 +53,7 @@ const Home = () => {
                 </div>
             </div>
             <div className='container' style={{}} id='show'>
-                <div className="bg-dark bg-body-tertiary ">
+                <div className="bg-dark bg-body ">
                     <div className="container-fluid d-flex justify-content-around">
                         <button style={{ width: 'auto' }} onClick={() => { navigate('/wishlist') }} className="btn btn-outline-danger no-phone wish mx-3 ">
                             <CiHeart /> Wishlist
@@ -61,19 +61,21 @@ const Home = () => {
                         <div className='d-flex justify-content-center' style={{ width: '85%' }}>
 
                             <input style={{ width: '75%' }} className="form-control me-2" type="search" placeholder="Search for products" aria-label="Search" />
-                            <button className="btn btn-success" type="submit"><FaSearch /></button>
+                            <button className="btn btn-outline-secondary" style={{ border: '1px solid gray' }} type="submit">
+                                <FaSearch style={{ fontSize: '25px' }} />
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="container my-4 box-3 d-flex" id='toShow' style={{ width: '100%', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
 
-                {
-                    loading ?
-                        (<Spinner2 />)
-                        :
-                        <>
+            {
+                loading ?
+                    (<Spinner2 />)
+                    :
+                    <>
+                        <div className="container my-4 box-3 d-flex" id='toShow' style={{ width: '100%', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
                             {products ? products?.map((item, i) =>
                                 item ?
                                     < Card
@@ -82,10 +84,10 @@ const Home = () => {
                                     '')
                                 :
                                 'No products in your shop. start Adding'}
-                        </>
-                }
+                        </div>
+                    </>
+            }
 
-            </div>
 
         </Layout>
     )

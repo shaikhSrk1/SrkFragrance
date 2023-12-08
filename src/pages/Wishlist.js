@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Layout from '../Components/Layout/Layout';
 import noWish from '../photos/empty-wishlist.png'
 import toast from 'react-hot-toast';
@@ -7,16 +7,13 @@ import { useWishlist } from '../context/wish.js';
 import { useCart } from '../context/cart.js';
 
 const Wishlist = () => {
-
     const navigate = useNavigate();
-
     const [wish, setWish] = useWishlist();
     const [cart, setCart] = useCart()
 
     const foo = () => {
         navigate('/')
     }
-
 
     const addtocart = (e, m) => {
         e.preventDefault();

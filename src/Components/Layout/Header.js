@@ -8,9 +8,10 @@ import { CiLogin } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { CiHeart } from "react-icons/ci";
+
 import { FaHeart } from "react-icons/fa";
 import { useCart } from '../../context/cart';
+import logo from '../../photos/Logo.png'
 import { Modal } from 'antd';
 
 const Header = () => {
@@ -43,7 +44,9 @@ const Header = () => {
     return (
         <>
             <nav id='Nav' className="navbar navbar-expand-lg bg-body-tertiary" style={{ position: 'fixed', zIndex: '5', width: '100%' }}>
-                <Link to='/about' style={{}} id='brand' className=""> <h5 className='m-0'>Aromas Haven</h5></Link >
+                <img src={logo} style={{ height: '40px' }} />
+                <Link to='/about' style={{}} id='brand' className="">
+                    <h5 className='m-0'>Aromas Haven</h5></Link >
                 {/* <div className="container-fluid"> */}
 
 
@@ -167,22 +170,22 @@ const Header = () => {
                     {/* </div> */}
                 </div>
             </nav>
-            <>
-                <Modal styles={{ height: 'fit-content' }} onCancel={() => setVisible(false)} footer={null} open={visible} >
-                    <div className='d-flex ' style={{ flexDirection: 'column' }}>
-                        <p style={{ fontSize: '20px' }}> Are you sure you want to logout ?</p>
 
-                        <span style={{ display: 'flex', justifyContent: 'space-around' }}>
-                            <button onClick={() => { setVisible(false) }} className='btn btn-secondary'>
-                                Cancel
-                            </button>
-                            <button onClick={() => handleLogout()} className='btn btn-outline-danger'>
-                                Logout
-                            </button>
-                        </span>
-                    </div>
-                </Modal>
-            </>
+            <Modal styles={{ height: 'fit-content' }} onCancel={() => setVisible(false)} footer={null} open={visible} >
+                <div className='d-flex ' style={{ flexDirection: 'column' }}>
+                    <p style={{ fontSize: '20px' }}> Are you sure you want to logout ?</p>
+
+                    <span style={{ display: 'flex', justifyContent: 'space-around' }}>
+                        <button onClick={() => { setVisible(false) }} className='btn btn-secondary'>
+                            Cancel
+                        </button>
+                        <button onClick={() => handleLogout()} className='btn btn-outline-danger'>
+                            Logout
+                        </button>
+                    </span>
+                </div>
+            </Modal>
+
         </>
     )
 }

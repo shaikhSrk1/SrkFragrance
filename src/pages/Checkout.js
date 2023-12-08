@@ -20,7 +20,7 @@ const Checkout = () => {
     const [lname, setLname] = useState();
     const [email, setEmail] = useState(auth?.user?.email);
     const [address, setAddress] = useState();
-    const [paymentoption, setPaymentoption] = useState();
+    const [paymentoption, setPaymentoption] = useState("pod");
     const [phone, setPhone] = useState();
     const [visible, setVisible] = useState(false);
     const [isDone, setIsDone] = useState(false)
