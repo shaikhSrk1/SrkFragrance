@@ -21,7 +21,7 @@ const Login = () => {
                 toast.success('Login successfully');
 
                 if (resp.data.user.role === 1) {
-                    navigate('/dashboard/products')
+                    navigate('/dashboard/messages')
                 } else {
                     navigate(location.state || "/");
                 }

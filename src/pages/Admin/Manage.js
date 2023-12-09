@@ -14,7 +14,8 @@ const Manage = () => {
         try {
             const x = await axios.get(`${process.env.REACT_APP_API}api/v1/manage/get-users`);
             if (x.data.users) {
-                setUsers(x.data.users)
+                setUsers(x.data.users);
+                setLoading(false)
             }
         } catch (e) {
             console.log('error in users');
@@ -40,7 +41,6 @@ const Manage = () => {
             console.log(x)
             if (x.data.subs) {
                 setSubs(x.data.subs);
-                setLoading(false)
             }
         } catch (e) {
             console.log('error in users');

@@ -13,8 +13,31 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [key, setKey] = useState("")
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    const search = async (k) => {
+        try {
+            setLoading(true)
+            if (k === "") {
+                getAllProducts();
+                return;
+            }
+            else {
+                console.log(k)
+                const prod = await axios.get(`${process.env.REACT_APP_API}api/v1/product/search/${k}`);
+                // prod = await prod.json();
+                if (prod) {
+                    setProducts(prod.data.products);
+                    setLoading(false)
+                }
+            }
+        } catch (e) {
+            console.log('error in fetching products', e);
+            return
+        }
+    }
 
     const getAllProducts = async () => {
         try {
@@ -38,7 +61,11 @@ const Home = () => {
 
 
     useEffect(() => {
-        getAllProducts();
+        if (key != "") {
+            search()
+        } else {
+            getAllProducts();
+        }
     }, [])
 
 
@@ -60,8 +87,8 @@ const Home = () => {
                         </button>
                         <div className='d-flex justify-content-center' style={{ width: '85%' }}>
 
-                            <input style={{ width: '75%' }} className="form-control me-2" type="search" placeholder="Search for products" aria-label="Search" />
-                            <button className="btn btn-outline-secondary" style={{ border: '1px solid gray' }} type="submit">
+                            <input style={{ width: '75%' }} className="form-control me-2" type="search" value={key} onChange={(e) => { setKey(e.target.value); search(e.target.value) }} placeholder="Search for products" aria-label="Search" />
+                            <button className="btn btn-outline-secondary" onClick={() => search(key)} style={{ border: '1px solid gray' }} type="submit">
                                 <FaSearch style={{ fontSize: '25px' }} />
                             </button>
                         </div>
@@ -69,21 +96,23 @@ const Home = () => {
                 </div>
             </div>
 
-
             {
                 loading ?
                     (<Spinner2 />)
                     :
                     <>
                         <div className="container my-4 box-3 d-flex" id='toShow' style={{ width: '100%', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
-                            {products ? products?.map((item, i) =>
+                            {products?.length > 0 ? products?.map((item, i) =>
                                 item ?
                                     < Card
                                         Product={item}
                                     /> :
                                     '')
                                 :
-                                'No products in your shop. start Adding'}
+                                <div style={{ height: '30vh' }}>
+                                    <p>Product Not Found</p>
+                                </div>
+                            }
                         </div>
                     </>
             }

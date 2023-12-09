@@ -101,9 +101,11 @@ const Header = () => {
                                 <NavLink to='/' className="nav-link" aria-current="page">Home</NavLink>
                             </li>
 
-                            <li className="nav-item"  >
-                                <NavLink to='/myorders' className="nav-link">My Orders</NavLink>
-                            </li>
+                            {
+                                auth?.token && <li className="nav-item"  >
+                                    <NavLink to='/myorders' className="nav-link">My Orders</NavLink>
+                                </li>
+                            }
                             <li className="nav-item">
                                 <NavLink to='/about' className="nav-link" aria-current="page">About</NavLink>
                             </li>

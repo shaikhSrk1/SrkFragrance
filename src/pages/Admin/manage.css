@@ -5,3 +5,33 @@
 .user-box {
     align-items: center;
 }
+
+
+
+.tuple .tup-4 {
+    width: 30%;
+}
+
+#tuple span {
+    background-color: gray;
+    color: white;
+    text-align: center;
+    border-left: 1px solid black;
+}
+
+.tuple .tup-3 {
+    width: 25%;
+}
+
+.tuple .tup-2 {
+    width: 10%;
+}
+
+.tup-1 {
+    width: 3%;
+}
+
+.tuple span {
+    border: 1px solid gray;
+    text-align: center;
+}

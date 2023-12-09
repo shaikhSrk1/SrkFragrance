@@ -56,7 +56,6 @@ const Profile = () => {
                         </div>
                     </div>
                     <div>
-
                         <button style={{ width: 'auto' }} onClick={() => { navigate('/wishlist') }} className="btn btn-outline-danger no-phone wish mx-3 ">
                             <CiHeart />My Wishlist
                         </button>
