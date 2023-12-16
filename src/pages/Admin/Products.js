@@ -91,6 +91,7 @@ const Products = () => {
     }
 
     const deleteproduct = async (id) => {
+         e.preventDefault()
         try {
             const res = await axios.delete(`${process.env.REACT_APP_API}api/v1/product/delete-product/${id}`);
             // prod = await prod.json();
