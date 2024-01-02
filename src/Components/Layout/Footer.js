@@ -46,16 +46,12 @@ const Footer = () => {
                         </form>
                         <section className="mb-4">
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-                                distinctio earum repellat quaerat voluptatibus placeat nam,
-                                commodi optio pariatur est quia magnam eum harum corrupti dicta,
-                                aliquam sequi voluptate quas.
+                                Indulge your senses in a symphony of scents with our exquisite collection of perfumes and attars. Elevate your fragrance experience with our curated selection, where luxury meets tradition. Unveil the essence of sophistication and allure; shop now for an unforgettable olfactory journey. Embrace the magic of captivating fragrances at Srk Fragrance
                             </p>
                         </section>
                         <div className='links'>
                             <Link to='/about' href="#Nav">About </Link> |
                             <Link to='/contact'>Contact Us</Link>|
-                            <Link to='/policy'>Privacy Policy </Link>
                         </div>
                     </section>
                 </div>

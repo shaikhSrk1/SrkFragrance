@@ -44,9 +44,9 @@ const Header = () => {
     return (
         <>
             <nav id='Nav' className="navbar navbar-expand-lg bg-body-tertiary" style={{ position: 'fixed', zIndex: '5', width: '100%' }}>
-                <img src={logo} style={{ height: '40px' }} />
+                {/* <img src={logo} style={{ height: '40px' }} /> */}
                 <Link to='/about' style={{}} id='brand' className="">
-                    <h5 className='m-0'>Srk Fragrance</h5></Link >
+                    <h4 className='m-0 ms-1' style={{ fontSize: '20px' }}>Srk Fragrance</h4></Link >
                 {/* <div className="container-fluid"> */}
 
 
@@ -75,7 +75,7 @@ const Header = () => {
 
                 <div className="collapse navbar-collapse" id="navbarNav">
                     {
-                        auth.user && auth.user._id === "65355a9e3e19fff66f42a400" ? (<ul className="ms-auto navbar-nav">
+                        auth.user && auth.user.role === 1 ? (<ul className="ms-auto navbar-nav">
                             <li className="nav-item">
                                 <NavLink to='/dashboard/products' className="nav-link" aria-current="page">Products</NavLink>
                             </li>

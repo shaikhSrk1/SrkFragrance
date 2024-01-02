@@ -30,7 +30,6 @@ const Contact = () => {
                     <h1>Let's get in touch</h1>
                     <p className="mb-4">We're open for any suggestion or just to have a chat</p>
                     <div className="dbox w-100 d-flex align-items-start">
-
                         <div className="text pl-3">
                             <p><span className="fa fa-map-marker mx-2"></span><span>Address:</span> Gaibinagar, Bhiwandi 421 302
                             </p>
@@ -38,13 +37,13 @@ const Contact = () => {
                     </div>
                     <div className="dbox w-100 d-flex align-items-center">
                         <div className="text pl-3">
-                            <p><span className="fa fa-phone mx-2"></span> <span>   Phone:</span> <a href="tel://1234567920"> + 1235 2355 98</a></p>
+                            <p><span className="fa fa-phone mx-2"></span> <span>   Phone:</span> <a href="tel://1234567920"> +91 9011654294</a></p>
                         </div>
                     </div>
                     <div className="dbox w-100 d-flex align-items-center">
                         <div className="text pl-3">
                             <p> <span className="fa fa-paper-plane mx-2"></span><span>Email:</span> <a
-                                href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+                                href="mailto:info@yoursite.com">srkfragrance@gmail.com</a></p>
                         </div>
                     </div>
 

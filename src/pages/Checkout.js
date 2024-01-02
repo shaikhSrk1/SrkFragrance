@@ -11,7 +11,6 @@ import Spinner3 from '../Components/Spinner3';
 
 
 const Checkout = () => {
-
     const [cart, setCart] = useCart();
     const [message, setMessage] = useState("");
     const [total, setTotal] = useState();
@@ -161,7 +160,14 @@ const Checkout = () => {
                         </div>
                         <div className="col-md-8 order-md-1">
                             <h4 className="mb-3">Shipping address</h4>
-                            <form className="needs-validation" onSubmit={(e) => { e.preventDefault(); if (paymentoption != 1) { setVisible(true); } }}>
+                            <form className="needs-validation" onSubmit={(e) => {
+                                e.preventDefault();
+                                if (phone?.length < 10) {
+                                    toast("Enter correct Phone number");
+                                    return;
+                                }
+                                if (paymentoption != 1) { setVisible(true); }
+                            }}>
                                 <div className="row">
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="firstName">First name</label>
@@ -176,7 +182,7 @@ const Checkout = () => {
                                 <div className="mb-3">
                                     <label htmlFor="Phone Number">Phone Number</label>
                                     <div className="input-group">
-                                        <input type="text" className="form-control" id="Phone Number" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Phone Number" required />
+                                        <input type="number" className="form-control" id="Phone Number" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Phone Number" required />
                                     </div>
                                 </div>
                                 <div className="mb-3">
@@ -196,7 +202,7 @@ const Checkout = () => {
                                         <input id="pod" name="paymentMethod" type="radio" onChange={e => setPaymentoption("pod")} className="form-check-input mx-2" style={{ border: '1px solid gray' }} defaultChecked required />
                                         <label className="custom-control-label" htmlFor="pod"> Pay on Delivery </label>
                                     </div>
-                                    <div className="custom-control mt-2 custom-radio">
+                                    {/* <div className="custom-control mt-2 custom-radio">
                                         <input id="card" name="paymentMethod" type="radio" onChange={e => setPaymentoption("card")} className="form-check-input mx-2" style={{ border: '1px solid gray' }} required />
                                         <label className="custom-control-label  me-5" htmlFor="card" >Card</label>
 
@@ -212,7 +218,7 @@ const Checkout = () => {
                                                     token={payNow}
                                                 /> : ''
                                         }
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <hr className="mb-4" />

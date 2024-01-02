@@ -90,8 +90,8 @@ const Products = () => {
         }
     }
 
-    const deleteproduct = async (e,id) => {
-         e.preventDefault()
+    const deleteproduct = async (e, id) => {
+        e.preventDefault()
         try {
             const res = await axios.delete(`${process.env.REACT_APP_API}api/v1/product/delete-product/${id}`);
             // prod = await prod.json();
@@ -115,7 +115,7 @@ const Products = () => {
                     </div>
                     <p>{feature}</p>
                     <div className='d-flex align-items-center justify-content-between'>
-                        <h2 style={{ color: '#383838' }}>$ {price}</h2>
+                        <h2 style={{ color: '#383838' }}>&#8377; {price}</h2>
                         <button onClick={() => { setVisible(true) }} className="btn btn-secondary mx-1">
                             Edit
                         </button>
@@ -166,7 +166,7 @@ const Products = () => {
                                 <textarea rows={4} value={description} onChange={(e) => { setDescription(e.target.value) }} className="form-control m-2" placeholder='Write Description' ></textarea>
 
                             </div>
-                            <button type="submit" className="btn px-3 btn-outline-danger mx-3 btn-block mb-4" onClick={(e) => deleteproduct(e,id)}>Delete Product</button>
+                            <button type="submit" className="btn px-3 btn-outline-danger mx-3 btn-block mb-4" onClick={(e) => deleteproduct(e, id)}>Delete Product</button>
                             <button type="submit" className="btn px-3 btn-primary btn-block mb-4" onClick={(e) => updateproduct(e)}>Update</button>
                         </form>
                         <div className="text-center">

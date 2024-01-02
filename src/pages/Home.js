@@ -74,8 +74,8 @@ const Home = () => {
 
             <div style={{ position: 'relative', height: '50vh', width: '100%' }} className='fluid-container no-phone' id='wall'>
                 <div style={{ backgroundColor: '', zIndex: '' }} className='batul p-2 ' >
-                    <h1>Aromas Haven</h1>
-                    <p>Welcome to Aroma Haven ! Our passion for scents and dedication to quality make us your ideal choice for all things perfume </p>
+                    <h1>Srk Fragrance</h1>
+                    <p>Welcome to Srk Fragrance ! Our passion for scents and dedication to quality make us your ideal choice for all things perfume </p>
                     <button className='btn btn-secondary' onClick={() => { handleScroll() }}> Start Shopping</button>
                 </div>
             </div>

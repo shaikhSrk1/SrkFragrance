@@ -103,7 +103,6 @@ const Myorders = () => {
                                                             }
 
                                                         </div>
-
                                                         <ul id="progressbar-1" className="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
                                                             {
                                                                 i.status == "Processed" ?
@@ -134,9 +133,16 @@ const Myorders = () => {
                                                             }
                                                         </ul>
                                                     </div>
-                                                    <div className="card-footer p-4">
-                                                        <button className='btn btn-outline-secondary' onClick={() => { setCancel(true); setToCanId(i._id) }} style={{ width: '100%' }}>Cancel Order</button>
-                                                    </div>
+                                                    {
+                                                        i.status != "Delivered" ?
+                                                            <div className="card-footer p-4">
+                                                                <button className='btn btn-outline-secondary' onClick={() => { setCancel(true); setToCanId(i._id) }} style={{ width: '100%' }}>Cancel Order</button>
+                                                            </div> :
+                                                            <div className="card-footer p-4">
+                                                                Item Delivered
+                                                            </div>
+                                                    }
+
                                                 </div>
                                             </div >
                                         </>

@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../../Components/Layout/Layout'
 import axios from 'axios';
 import Spinner2 from '../../Components/Spinner2';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import GetUser from './GetUser';
+import toast from 'react-hot-toast';
 import GetProduct from './GetProduct';
 
 const Orders = () => {
@@ -26,6 +29,18 @@ const Orders = () => {
         }
     }
 
+    const Foo = async (id, n) => {
+        try {
+            const x = await axios.get(`${process.env.REACT_APP_API}api/v1/manage/update-order/${id}/${n}`);
+            if (x) {
+                toast.success("successfull")
+            }
+        } catch (e) {
+            console.log('ERROR');
+            return
+        }
+        getOrders();
+    }
 
     useEffect(() => {
         getOrders();
@@ -77,11 +92,12 @@ const Orders = () => {
                                                 }
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
-                                                <Dropdown.Item >Shipped</Dropdown.Item>
-                                                <Dropdown.Item >Delivered</Dropdown.Item>
-                                                <Dropdown.Item >Cancelled</Dropdown.Item>
+                                                <Dropdown.Item onClick={() => { Foo(o._id, 1) }}>Shipped</Dropdown.Item>
+                                                <Dropdown.Item onClick={() => { Foo(o._id, 2) }}>Delivered</Dropdown.Item>
+                                                <Dropdown.Item onClick={() => { Foo(o._id, 3) }}>Cancelled</Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
+
                                         <p style={{ fontSize: '20px' }}> &#8377;{o.payment.price}</p>
                                         <p>{o.payment.paymentoption}</p>
                                     </span>
