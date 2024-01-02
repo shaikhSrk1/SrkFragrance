@@ -46,7 +46,7 @@ const Header = () => {
             <nav id='Nav' className="navbar navbar-expand-lg bg-body-tertiary" style={{ position: 'fixed', zIndex: '5', width: '100%' }}>
                 <img src={logo} style={{ height: '40px' }} />
                 <Link to='/about' style={{}} id='brand' className="">
-                    <h5 className='m-0'>Aromas Haven</h5></Link >
+                    <h5 className='m-0'>Srk Fragrance</h5></Link >
                 {/* <div className="container-fluid"> */}
 
 
