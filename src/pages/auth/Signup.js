@@ -42,17 +42,7 @@ const Signup = () => {
                         <p> Already have an Account ? <Link to='/Login' href="#!">Login</Link></p>
                         <button type="submit" className="btn px-3 btn-primary btn-block mb-4">Register</button>
                     </form>
-                    <div className="text-center">
-
-                        <p>or sign up with:</p>
-                        <button type="button" className="btn btn-secondary btn-floating mx-1">
-                            <i className="fab fa-facebook-f" />
-                        </button>
-                        <button type="button" className="btn btn-secondary btn-floating mx-1">
-                            <i className="fab fa-google" />
-                        </button>
-                    </div>
-
+                   
                 </div>
             </div >
         </Layout >
