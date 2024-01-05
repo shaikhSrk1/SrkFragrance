@@ -13,6 +13,7 @@ import { FaHeart } from "react-icons/fa";
 import { useCart } from '../../context/cart';
 import logo from '../../photos/Logo.png'
 import { Modal } from 'antd';
+import about from '../../photos/about.jpg'
 
 const Header = () => {
     const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Header = () => {
     return (
         <>
             <nav id='Nav' className="navbar navbar-expand-lg bg-body-tertiary" style={{ position: 'fixed', zIndex: '5', width: '100%' }}>
-                {/* <img src={logo} style={{ height: '40px' }} /> */}
+                <img src={about} style={{ height: '40px' }} />
                 <Link to='/about' style={{}} id='brand' className="">
                     <h4 className='m-0 ms-1' style={{ fontSize: '20px' }}>Srk Fragrance</h4></Link >
                 {/* <div className="container-fluid"> */}
