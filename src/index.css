@@ -77,11 +77,21 @@ p {
 }
 
 
+@keyframes myfirst {
+
+  100% {
+    transform: scale(0.97);
+  }
+}
+
 .about img {
   height: 100%;
   width: 80%;
   margin: auto;
+  box-shadow: rgba(72, 72, 73, 0.542) 0px 7px 29px 0px;
+  animation: myfirst 1s infinite alternate;
 }
+
 
 @media only screen and (max-width: 500px) {
 
