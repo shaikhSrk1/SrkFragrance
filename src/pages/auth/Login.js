@@ -54,13 +54,7 @@ const Login = () => {
                     </form>
                     <div className="text-center">
                         <p>Not a member? <Link to='/register' href="#!">Register</Link></p>
-                        <p>or sign up with:</p>
-                        <button type="button" className="btn btn-secondary btn-floating mx-1">
-                            <i className="fab fa-facebook-f" />
-                        </button>
-                        <button type="button" className="btn btn-secondary btn-floating mx-1">
-                            <i className="fab fa-google" />
-                        </button>
+                       
                     </div>
                 </div ></div>
         </Layout>
